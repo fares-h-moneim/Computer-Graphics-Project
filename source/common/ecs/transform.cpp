@@ -11,9 +11,9 @@ namespace our {
     glm::mat4 Transform::toMat4() const {
         //TODO: (Req 3) Write this function
         glm::mat4 trans = glm::mat4(1.0f);
-        trans = glm::scale(trans, scale);      
-        trans = trans*glm::yawPitchRoll(rotation.y, rotation.x, rotation.z);
         trans = glm::translate(trans, position);
+        trans = trans*glm::yawPitchRoll(rotation.y, rotation.x, rotation.z);
+        trans = glm::scale(trans, scale);      
         
         
         return trans;
