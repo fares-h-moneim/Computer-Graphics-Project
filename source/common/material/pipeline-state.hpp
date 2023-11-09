@@ -58,6 +58,7 @@ namespace our
             else
                 glDisable(GL_CULL_FACE); // To disable face culling
 
+            // Depth Testing: To determine which fragment is closer to the camera
             if (depthTesting.enabled)
             {
                 glEnable(GL_DEPTH_TEST);            // To enable depth testing
@@ -66,6 +67,7 @@ namespace our
             else
                 glDisable(GL_DEPTH_TEST); // To disable depth testing
 
+            // Blending: To blend the color of the fragment with the color of the pixel in the framebuffer
             if (blending.enabled)
             {
                 glEnable(GL_BLEND);                                                                                                   // To enable blending
@@ -76,6 +78,7 @@ namespace our
             else
                 glDisable(GL_BLEND); // To disable blending
 
+            // Color and Depth Mask: To prevent the rendering/clearing from modifying certain channels of certain targets in the framebuffer
             glColorMask(colorMask.r, colorMask.g, colorMask.b, colorMask.a); // To specify the color mask
 
             glDepthMask(depthMask); // To specify the depth mask
