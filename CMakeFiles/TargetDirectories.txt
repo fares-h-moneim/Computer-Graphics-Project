@@ -1,0 +1,5 @@
+D:/gam3a/graphics/Computer-Graphics-Project/CMakeFiles/GAME_APPLICATION.dir
+D:/gam3a/graphics/Computer-Graphics-Project/CMakeFiles/ALL_BUILD.dir
+D:/gam3a/graphics/Computer-Graphics-Project/CMakeFiles/ZERO_CHECK.dir
+D:/gam3a/graphics/Computer-Graphics-Project/vendor/glfw/CMakeFiles/ALL_BUILD.dir
+D:/gam3a/graphics/Computer-Graphics-Project/vendor/glfw/src/CMakeFiles/glfw.dir
