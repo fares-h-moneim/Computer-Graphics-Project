@@ -47,13 +47,16 @@ namespace our
         // This template method searhes for a component of type T and returns a pointer to it
         // If no component of type T was found, it returns a nullptr
         template <typename T>
-        T *getComponent()
+        T *getComponent() // this function assumes that there is only one component of type T?
         {
             // TODO: (Req 8) Go through the components list and find the first component that can be dynamically cast to "T*".
             //  Return the component you found, or return null of nothing was found.
+            // ensure that T is a component
             static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
+            // go through the components list and find the first component that can be dynamically cast to "T*"
             for (auto component : components)
             {
+                // if found return the component
                 T *castedComponent = dynamic_cast<T *>(component);
                 if (castedComponent != nullptr)
                 {
@@ -87,7 +90,9 @@ namespace our
                 T *castedComponent = dynamic_cast<T *>(*it);
                 if (castedComponent != nullptr)
                 {
+                    // delete the found component and remove it from the components list
                     delete *it;
+                    // remove the current pointer to invalid memory
                     components.erase(it);
                     break;
                 }

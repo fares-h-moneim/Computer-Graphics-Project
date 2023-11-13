@@ -150,8 +150,7 @@ namespace our
 
         // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         //  HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
-        glm::mat4 M = camera->getOwner()->getLocalToWorldMatrix();
-        glm::vec3 cameraForward = M * glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
+        glm::vec3 cameraForward = glm::vec3(0.0f, 0.0f, 1.0f);
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second)
                   {
                       // TODO: (Req 9) Finish this function
@@ -184,9 +183,11 @@ namespace our
         // If there is a sky material, draw the sky
         for (auto command : opaqueCommands)
         {
-            command.material->set("transform", VP * command.localToWorld);
-            command.material->draw(command.mesh);
+            command.material->setup();
+            command.material->shader->set("transform", VP * command.localToWorld);
+            command.mesh->draw();
         }
+
         if (this->skyMaterial)
         {
             // TODO: (Req 10) setup the sky material
@@ -210,8 +211,9 @@ namespace our
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         for (auto command : transparentCommands)
         {
-            command.material->set("transform", VP * command.localToWorld);
-            command.material->draw(command.mesh);
+            command.material->setup();
+            command.material->shader->set("transform", VP * command.localToWorld);
+            command.mesh->draw();
         }
         // If there is a postprocess material, apply postprocessing
         if (postprocessMaterial)

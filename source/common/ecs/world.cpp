@@ -13,9 +13,13 @@ namespace our
         for (const auto &entityData : data)
         {
             // TODO: (Req 8) Create an entity, make its parent "parent" and call its deserialize with "entityData".
+            // add entity to the world
             Entity *entity = add();
+            // set its parent to the given parent
             entity->parent = parent;
+            // call its deserialize with entityData from entity class
             entity->deserialize(entityData);
+            // check if it has children
             if (entityData.contains("children"))
             {
                 // TODO: (Req 8) Recursively call this world's "deserialize" using the children data

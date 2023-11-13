@@ -14,10 +14,15 @@ namespace our
     glm::mat4 Entity::getLocalToWorldMatrix() const
     {
         // TODO: (Req 8) Write this function
+        // go from localspace to worldspace
+        // getting current object entity relative to its parent
         glm::mat4 localToWorldMatrix = localTransform.toMat4();
+        // getting the parent of the current object
         const Entity *parent = this->parent;
+        // while im still not top of the hierarchy
         while (parent != nullptr)
         {
+            // multiply current object with its parent
             localToWorldMatrix = parent->localTransform.toMat4() * localToWorldMatrix;
             parent = parent->parent;
         }

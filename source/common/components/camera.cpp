@@ -26,10 +26,10 @@ namespace our
     }
 
     // Creates and returns the camera view matrix
-    glm::mat4 CameraComponent::getViewMatrix() const
+    glm::mat4 CameraComponent::getViewMatrix() const // from world to camera
     {
-        auto owner = getOwner();
-        auto M = owner->getLocalToWorldMatrix();
+        auto owner = getOwner();                 // get entity owner
+        auto M = owner->getLocalToWorldMatrix(); // get local to world matrix
         // TODO: (Req 8) Complete this function
         // HINT:
         //  In the camera space:
