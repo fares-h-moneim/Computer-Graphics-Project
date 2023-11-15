@@ -154,14 +154,14 @@ namespace our
 
         // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         //  HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
-        auto M = camera->getOwner()->getLocalToWorldMatrix();
-        glm::vec3 cameraForward = M * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
+
+        glm::vec3 cameraForward = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second)
                   {
                       // TODO: (Req 9) Finish this function
                       //  HINT: the following return should return true "first" should be drawn before "second".
-                      float distance1 = glm::distance(first.center, cameraForward);
-                      float distance2 = glm::distance(second.center, cameraForward);
+                      float distance1 = glm::dot(cameraForward, first.center);
+                      float distance2 = glm::dot(cameraForward, second.center);
                       return distance1 < distance2; });
 
         // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
@@ -189,7 +189,8 @@ namespace our
         for (auto command : opaqueCommands)
         {
             command.material->setup();
-            command.material->shader->set("transform", VP * command.localToWorld);
+            glm::mat4 transform = VP * command.localToWorld;
+            command.material->shader->set("transform", transform);
             command.mesh->draw();
         }
 
@@ -224,7 +225,8 @@ namespace our
         for (auto command : transparentCommands)
         {
             command.material->setup();
-            command.material->shader->set("transform", VP * command.localToWorld);
+            glm::mat4 transform = VP * command.localToWorld;
+            command.material->shader->set("transform", transform);
             command.mesh->draw();
         }
         // If there is a postprocess material, apply postprocessing
