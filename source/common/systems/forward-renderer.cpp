@@ -57,12 +57,14 @@ namespace our
         if (config.contains("postprocess"))
         {
             // TODO: (Req 11) Create a framebuffer
+            
 
             // TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             //  Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             //  The depth format can be (Depth component with 24 bits).
-
+            
             // TODO: (Req 11) Unbind the framebuffer just to be safe
+           
 
             // Create a vertex array to use for drawing the texture
             glGenVertexArrays(1, &postProcessVertexArray);
@@ -160,9 +162,13 @@ namespace our
                   {
                       // TODO: (Req 9) Finish this function
                       //  HINT: the following return should return true "first" should be drawn before "second".
-                      float distance1 = glm::dot(cameraForward, first.center);
-                      float distance2 = glm::dot(cameraForward, second.center);
-                      return distance1 < distance2; });
+                     float distance1 = glm::dot(cameraForward, first.center);
+                     float distance2 = glm::dot(cameraForward, second.center);
+                      return distance1 > distance2; });
+
+        
+
+        
 
         // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
         glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
@@ -178,14 +184,17 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) bind the framebuffer
+            
         }
 
         // TODO: (Req 9) Clear the color and depth buffers
+        
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // TODO: (Req 9) Draw all the opaque commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         // If there is a sky material, draw the sky
+        glEnable(GL_DEPTH_TEST);
         for (auto command : opaqueCommands)
         {
             command.material->setup();
@@ -233,8 +242,10 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) Return to the default framebuffer
+           
 
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
+            
         }
     }
 

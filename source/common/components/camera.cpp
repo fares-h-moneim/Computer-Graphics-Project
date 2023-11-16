@@ -28,17 +28,17 @@ namespace our
     // Creates and returns the camera view matrix
     glm::mat4 CameraComponent::getViewMatrix() const // from world to camera
     {
-        auto owner = getOwner();                 // get entity owner
-        auto M = owner->getLocalToWorldMatrix(); // get local to world matrix
+        Entity* owner = getOwner();                 // get entity owner
+        glm::mat4 M = owner->getLocalToWorldMatrix(); // get local to world matrix
         // TODO: (Req 8) Complete this function
         // HINT:
         //  In the camera space:
         //  - eye is the origin (0,0,0)
-        auto eye = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 eye = glm::vec3(0.0f, 0.0f, 0.0f);
         // - center is any point on the line of sight. So center can be any point (0,0,z) where z < 0. For simplicity, we let center be (0,0,-1)
         // - up is the direction (0,1,0)
-        auto center = glm::vec3(0.0f, 0.0f, -1.0f);
-        auto up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::vec3 center = glm::vec3(0.0f, 0.0f, -1.0f);
+        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
         // but to use glm::lookAt, we need eye, center and up in the world state.
         // Since M (see above) transforms from the camera to thw world space, you can use M to compute:
         // - the eye position which is the point (0,0,0) but after being transformed by M
