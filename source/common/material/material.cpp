@@ -6,56 +6,65 @@
 namespace our
 {
 
-    // This function should setup the pipeline state and set the shader to be used
+    // Function: Sets up the pipeline state and activates the shader for rendering
     void Material::setup() const
     {
-        // TODO: (Req 7) Write this function
-
-        pipelineState.setup();
-        shader->use();
+        // TODO: (Req 7) Set up the pipeline state and activate the shader for rendering
+        pipelineState.setup(); // Set up pipeline state
+        shader->use();         // Activate the shader
     }
 
-    // This function read the material data from a json object
+    // Function: Reads material data from a JSON object
     void Material::deserialize(const nlohmann::json &data)
     {
+        // Check if the data is an object
         if (!data.is_object())
             return;
 
+        // Check if "pipelineState" is present and deserialize it
         if (data.contains("pipelineState"))
         {
             pipelineState.deserialize(data["pipelineState"]);
         }
+
+        // Get the shader from the AssetLoader based on the provided string
         shader = AssetLoader<ShaderProgram>::get(data["shader"].get<std::string>());
+
+        // Set the "transparent" flag to the value in the JSON object, defaulting to false
         transparent = data.value("transparent", false);
     }
 
-    // This function should call the setup of its parent and
-    // set the "tint" uniform to the value in the member variable tint
+    // Function: Calls the setup of its parent and sets the "tint" uniform
     void TintedMaterial::setup() const
     {
-        // TODO: (Req 7) Write this function
-        Material::setup();
-        shader->set("tint", tint);
+        // TODO: (Req 7) Call the setup of the parent and set the "tint" uniform
+        Material::setup();         // Call the parent setup
+        shader->set("tint", tint); // Set the "tint" uniform
     }
 
-    // This function read the material data from a json object
+    // Function: Reads material data from a JSON object
     void TintedMaterial::deserialize(const nlohmann::json &data)
     {
+        // Call the deserialize of the parent
         Material::deserialize(data);
+
+        // Check if the data is an object
         if (!data.is_object())
             return;
+
+        // Set the "tint" member variable to the value in the JSON object, defaulting to white
         tint = data.value("tint", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
     }
 
-    // This function should call the setup of its parent and
-    // set the "alphaThreshold" uniform to the value in the member variable alphaThreshold
-    // Then it should bind the texture and sampler to a texture unit and send the unit number to the uniform variable "tex"
+    // Function: Calls the setup of its parent, sets additional uniforms, and binds textures and samplers
     void TexturedMaterial::setup() const
     {
-        // TODO: (Req 7) Write this function
-        TintedMaterial::setup();
-        shader->set("alphaThreshold", alphaThreshold);
-        glActiveTexture(GL_TEXTURE0);
+        // TODO: (Req 7) Call the setup of the parent, set additional uniforms, and bind textures and samplers
+        TintedMaterial::setup();                       // Call the parent setup
+        shader->set("alphaThreshold", alphaThreshold); // Set additional uniform "alphaThreshold"
+        glActiveTexture(GL_TEXTURE0);                  // Activate texture unit 0
+
+        // Bind texture and sampler to texture unit 0, and send the unit number to the uniform variable "tex"
         if (texture)
             texture->bind();
         if (sampler)
@@ -63,13 +72,20 @@ namespace our
         shader->set("tex", 0);
     }
 
-    // This function read the material data from a json object
+    // Function: Reads material data from a JSON object
     void TexturedMaterial::deserialize(const nlohmann::json &data)
     {
+        // Call the deserialize of the parent
         TintedMaterial::deserialize(data);
+
+        // Check if the data is an object
         if (!data.is_object())
             return;
+
+        // Set the "alphaThreshold" member variable to the value in the JSON object, defaulting to 0.0f
         alphaThreshold = data.value("alphaThreshold", 0.0f);
+
+        // Get the texture and sampler from the AssetLoader based on the provided strings
         texture = AssetLoader<Texture2D>::get(data.value("texture", ""));
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
     }
