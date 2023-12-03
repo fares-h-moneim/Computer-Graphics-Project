@@ -208,12 +208,21 @@ namespace our
         // TODO: (Req 9) Draw all the opaque commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         // If there is a sky material, draw the sky
+        // Enable depth testing to ensure correct rendering order based on depth
         glEnable(GL_DEPTH_TEST);
+        // Loop through all opaque render commands
         for (auto command : opaqueCommands)
         {
+            // Setup the material for the current command
             command.material->setup();
+
+            // Calculate the model-view-projection matrix for the current command
             glm::mat4 transform = VP * command.localToWorld;
+
+            // Set the "transform" uniform in the shader to the calculated matrix
             command.material->shader->set("transform", transform);
+
+            // Draw the mesh associated with the current command
             command.mesh->draw();
         }
 
@@ -244,14 +253,22 @@ namespace our
         }
         // TODO: (Req 9) Draw all the transparent commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
+        // Draw all the transparent commands
+        // Iterate over each command in the transparentCommands vector
         for (auto command : transparentCommands)
         {
+            // Setup the material for the current command
             command.material->setup();
+
+            // Calculate the model-view-projection matrix for the current command
             glm::mat4 transform = VP * command.localToWorld;
+
+            // Set the "transform" uniform in the shader to the calculated transform matrix
             command.material->shader->set("transform", transform);
+
+            // Draw the mesh associated with the current command
             command.mesh->draw();
         }
-        // If there is a postprocess material, apply postprocessing
         if (postprocessMaterial)
         {
             // TODO: (Req 11) Return to the default framebuffer
