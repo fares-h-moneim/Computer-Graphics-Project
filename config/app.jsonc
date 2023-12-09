@@ -167,7 +167,7 @@
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [0, 0.1, 0],
+                        "linearVelocity": [0, 1, 0],
                         "angularVelocity": [0, 45, 0]
                     }
                 ]
@@ -257,6 +257,10 @@
                     {
                         "type": "Movement",
                         "angularVelocity": [0, 90, 0]
+                    },
+                    {
+                        "type": "Light",
+                        "lightColor": [1, 1, 1]
                     }
                 ]
             }

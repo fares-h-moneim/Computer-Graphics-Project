@@ -138,10 +138,16 @@ namespace our
     {
         // First of all, we search for a camera and for all the mesh renderers
         CameraComponent *camera = nullptr;
+        std::vector<Entity *> lightsources;
         opaqueCommands.clear();
         transparentCommands.clear();
         for (auto entity : world->getEntities())
         {
+            //if the entity has a lightsource component, add it to the lightsources vector
+            if (entity->getComponent<LightComponent>())
+            {
+                lightsources.push_back(entity);
+            }
             // If we hadn't found a camera yet, we look for a camera in this entity
             if (!camera)
                 camera = entity->getComponent<CameraComponent>();
@@ -207,6 +213,7 @@ namespace our
         // TODO: (Req 9) Draw all the opaque commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         // If there is a sky material, draw the sky
+        
         glEnable(GL_DEPTH_TEST);
         for (auto command : opaqueCommands)
         {
@@ -215,11 +222,12 @@ namespace our
             command.material->shader->set("transform", transform);
             if(dynamic_cast<LitMaterial*>(command.material))
             {
-                printf("opaque hereeeeeeeeeeeeeeeeeee buuttt LITTTTTTTTTTTTTT\n");
+                LightComponent* light = lightsources[0]->getComponent<LightComponent>();
                 command.material->shader->set("model",command.localToWorld);
                 //find the light-sources and get there info "location, color, intensity" etc
-                command.material->shader->set("light_color",glm::vec3(1.0,0.5,0.5));
-                command.material->shader->set("light_pos",glm::vec3(0.0,1.0,0.0));
+                command.material->shader->set("light_color",light->lightColor);
+                glm::vec3 lightPos = lightsources[0]->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f);
+                command.material->shader->set("light_pos",lightPos);
                 glm::vec3 cameraPos = camera->getOwner()->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f);
                 command.material->shader->set("view_pos",cameraPos);
             }
