@@ -90,4 +90,24 @@ namespace our
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
     }
 
+
+    void LitMaterial::setup() const
+    {
+        TexturedMaterial::setup();
+        //Q: what now?
+        
+    }
+    void LitMaterial::deserialize(const nlohmann::json &data)
+    {
+        TexturedMaterial::deserialize(data);
+        if (!data.is_object())
+            return;
+        roughnessMap = AssetLoader<Texture2D>::get(data.value("roughnessMap", ""));
+        ambient_occlusionMap = AssetLoader<Texture2D>::get(data.value("ambient_occlusionMap", ""));
+        diffuseMap = AssetLoader<Texture2D>::get(data.value("diffuseMap", ""));
+        specular = AssetLoader<Texture2D>::get(data.value("specular", "")); 
+        emission = AssetLoader<Texture2D>::get(data.value("emission", ""));   
+    }
+
+
 }

@@ -213,6 +213,16 @@ namespace our
             command.material->setup();
             glm::mat4 transform = VP * command.localToWorld;
             command.material->shader->set("transform", transform);
+            if(dynamic_cast<LitMaterial*>(command.material))
+            {
+                printf("opaque hereeeeeeeeeeeeeeeeeee buuttt LITTTTTTTTTTTTTT\n");
+                command.material->shader->set("model",command.localToWorld);
+                //find the light-sources and get there info "location, color, intensity" etc
+                command.material->shader->set("light_color",glm::vec3(1.0,0.5,0.5));
+                command.material->shader->set("light_pos",glm::vec3(0.0,1.0,0.0));
+                glm::vec3 cameraPos = camera->getOwner()->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f);
+                command.material->shader->set("view_pos",cameraPos);
+            }
             command.mesh->draw();
         }
 
