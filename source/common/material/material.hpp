@@ -57,10 +57,11 @@ namespace our {
     class LitMaterial : public TexturedMaterial {
     public:
         Texture2D* roughnessMap;
-        Texture2D* ambient_occlusionMap;
+        //Texture2D* ambient_occlusionMap;
         Texture2D* diffuseMap; 
         Texture2D* specular;
-        Texture2D* emission;
+       // Texture2D* emission;
+        float shineness;
         void setup() const override;
         void deserialize(const nlohmann::json& data) override;
 

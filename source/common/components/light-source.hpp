@@ -8,10 +8,11 @@ namespace our {
     class LightComponent : public Component {
     public:
         glm::vec3 lightColor;
-       // float lightIntensity;
-       // float lightRadius;
-       // float angle
-       // std::string lightType;
+        std::string lightType; // directional (sun) point(bulb) spot (flashlight)
+        glm::vec3 direction; //for directional light and spot (the direction it focus on)
+        float innerAngle; //for spot light
+        float outerAngle;  //for spot light
+        float constant, linear, quadratic; //for point light and spot light how they decrease
 
         // The ID of this component type is "Light"
         static std::string getID() { return "Light"; }

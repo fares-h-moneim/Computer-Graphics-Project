@@ -94,7 +94,16 @@ namespace our
     void LitMaterial::setup() const
     {
         TexturedMaterial::setup();
-        //Q: what now?
+        shader->set("material.shininess",shineness);
+        glActiveTexture(GL_TEXTURE1);
+        if(diffuseMap)
+        diffuseMap->bind();
+        glActiveTexture(GL_TEXTURE2);
+        if(specular)
+        specular->bind();
+        shader->set("material.diffuse",1);
+        shader->set("material.specular",2);
+        //Q: is this correct?
         
     }
     void LitMaterial::deserialize(const nlohmann::json &data)
@@ -103,10 +112,11 @@ namespace our
         if (!data.is_object())
             return;
         roughnessMap = AssetLoader<Texture2D>::get(data.value("roughnessMap", ""));
-        ambient_occlusionMap = AssetLoader<Texture2D>::get(data.value("ambient_occlusionMap", ""));
+        //ambient_occlusionMap = AssetLoader<Texture2D>::get(data.value("ambient_occlusionMap", ""));
         diffuseMap = AssetLoader<Texture2D>::get(data.value("diffuseMap", ""));
         specular = AssetLoader<Texture2D>::get(data.value("specular", "")); 
-        emission = AssetLoader<Texture2D>::get(data.value("emission", ""));   
+        shineness = data.value("shineness", 0.0f);
+       // emission = AssetLoader<Texture2D>::get(data.value("emission", ""));   
     }
 
 

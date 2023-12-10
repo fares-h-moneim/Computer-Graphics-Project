@@ -85,8 +85,8 @@
                     "sampler": "pixelated"
                 },
                 "grass":{
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling":{
                             "enabled": false
@@ -97,7 +97,11 @@
                     },
                     "tint": [1, 1, 1, 1],
                     "texture": "grass",
-                    "sampler": "default"
+                    "sampler": "default",
+                    "shineness":0.1,
+                    "diffuseMap": "grass",
+                    "specularMap": "grass",
+                    "roughnessMap": "grass"
                 },
                 "monkey":{
                     "type": "lit",
@@ -241,6 +245,15 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "glass"
+                    },
+                    {
+                        "type": "Light",
+                        "lightType": "point",
+                        "constant": 1.0,
+                        "linear": 0.09,
+                        "quadratic": 0.032,
+                        "lightColor": [0.0, 0.0, 1.0]
+
                     }
                 ]
             },
@@ -260,7 +273,12 @@
                     },
                     {
                         "type": "Light",
-                        "lightColor": [1, 1, 1]
+                        "lightType": "point",
+                        "constant": 1.0,
+                        "linear": 0.09,
+                        "quadratic": 0.032,
+                        "lightColor": [1.0, 1.0, 1.0]
+
                     }
                 ]
             }
