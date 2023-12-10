@@ -57,8 +57,17 @@ vec3 CalcPointLight(Light light)
     vec3 reflectDir = reflect(-lightDir, fs_in.normal);  
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * light.color;  
+    // attenuation
+    float distance = length(light.position - fs_in.Frag_position);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+    ambient *= attenuation;
+    diffuse *= attenuation;
+    specular *= attenuation;
     return (ambient + diffuse + specular);
 }
+
+//
+//
 void main(){
     vec3 result = vec3(0.0);
     vec3 mycolor= vec3(texture(tex,fs_in.tex_coord));

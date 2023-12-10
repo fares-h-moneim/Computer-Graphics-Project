@@ -12,7 +12,7 @@ namespace our {
         //for spot only
         innerAngle = data.value("innerAngle", innerAngle);
         outerAngle = data.value("outerAngle", outerAngle);
-        //for point &spot lights
+        //for point &spot lights attunuations 
         constant = data.value("constant", constant);
         linear = data.value("linear", linear);
         quadratic = data.value("quadratic", quadratic);

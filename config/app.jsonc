@@ -250,8 +250,8 @@
                         "type": "Light",
                         "lightType": "point",
                         "constant": 1.0,
-                        "linear": 0.09,
-                        "quadratic": 0.032,
+                        "linear": 0.0,
+                        "quadratic": 0.0,
                         "lightColor": [0.0, 0.0, 1.0]
 
                     }
@@ -275,8 +275,8 @@
                         "type": "Light",
                         "lightType": "point",
                         "constant": 1.0,
-                        "linear": 0.09,
-                        "quadratic": 0.032,
+                        "linear": 0.009,
+                        "quadratic": 0.002,
                         "lightColor": [1.0, 1.0, 1.0]
 
                     }

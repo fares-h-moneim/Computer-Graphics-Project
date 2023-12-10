@@ -101,6 +101,10 @@ namespace our
         glActiveTexture(GL_TEXTURE2);
         if(specular)
         specular->bind();
+        if (sampler)
+            sampler->bind(1);
+        if (sampler)
+            sampler->bind(2);
         shader->set("material.diffuse",1);
         shader->set("material.specular",2);
         //Q: is this correct?
