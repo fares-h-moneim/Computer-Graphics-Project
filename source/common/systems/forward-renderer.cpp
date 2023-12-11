@@ -239,10 +239,10 @@ namespace our
                     {
                         command.material->shader->set("lights["+std::to_string(i)+"].type",2);
                         //
-                       command.material->shader->set("lights["+std::to_string(i)+"].position",lightsources[i]->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f));
-                       command.material->shader->set("lights["+std::to_string(i)+"].direction",light->direction);
-                       command.material->shader->set("lights["+std::to_string(i)+"].cutOff",light->innerAngle);
-                       command.material->shader->set("lights["+std::to_string(i)+"].outerCutOff",light->outerAngle);
+                        command.material->shader->set("lights["+std::to_string(i)+"].position",glm::vec3(lightsources[i]->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f))); 
+                        command.material->shader->set("lights["+std::to_string(i)+"].direction",light->direction);
+                        command.material->shader->set("lights["+std::to_string(i)+"].cutOff",glm::cos(glm::radians(light->innerAngle)));
+                        command.material->shader->set("lights["+std::to_string(i)+"].outerCutOff",glm::cos(glm::radians(light->outerAngle)));
                         // the decay of light
                         command.material->shader->set("lights["+std::to_string(i)+"].constant",light->constant);
                         command.material->shader->set("lights["+std::to_string(i)+"].linear",light->linear);
@@ -257,7 +257,7 @@ namespace our
                         command.material->shader->set("lights["+std::to_string(i)+"].linear",light->linear);
                         command.material->shader->set("lights["+std::to_string(i)+"].quadratic",light->quadratic);
                         //
-                       command.material->shader->set("lights["+std::to_string(i)+"].position",lightsources[i]->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f)); 
+                         command.material->shader->set("lights["+std::to_string(i)+"].position",glm::vec3(lightsources[i]->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f))); 
                     }
                     if(lightType=="directional")
                     {

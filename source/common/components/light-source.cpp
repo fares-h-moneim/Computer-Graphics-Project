@@ -7,7 +7,7 @@ namespace our {
         if(!data.is_object()) return;
         lightColor = data.value("lightColor", lightColor); //Q: what is this default value
         lightType = data.value("lightType", lightType);
-        //for directional only
+        //for directional and spot only
         direction = data.value("direction", direction);
         //for spot only
         innerAngle = data.value("innerAngle", innerAngle);
