@@ -26,8 +26,11 @@ namespace our
                 // If the movement component exists
                 if(movement){
                     // Change the position and rotation based on the linear & angular velocity and delta time.
+                    entity->last_location = entity->localTransform.position;
                     entity->localTransform.position += deltaTime * movement->linearVelocity;
                     entity->localTransform.rotation += deltaTime * movement->angularVelocity;
+
+                    
                 }
             }
         }

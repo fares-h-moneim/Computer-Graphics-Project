@@ -137,13 +137,18 @@
         },
         "world":[
             {
-                "position": [0, 0, 10],
+                "position": [12, 12, 12],
                 "components": [
                     {
                         "type": "Camera"
                     },
                     {
                         "type": "Free Camera Controller"
+                    },
+                    {
+                        "type":"Collision",
+                        "center": [0, -1, 0],
+                        "size": [1.5, 2, 1.5]
                     }
                 ],
                 "children": [
@@ -173,6 +178,11 @@
                         "type": "Movement",
                         "linearVelocity": [0, 1, 0],
                         "angularVelocity": [0, 45, 0]
+                    },
+                    {
+                        "type":"Collision",
+                        "center": [0, 0, 0],
+                        "size": [1.1, 1.8, 1]
                     }
                 ]
             },
@@ -185,6 +195,11 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "grass"
+                    },
+                    {
+                        "type":"Collision",
+                        "center": [0, 0, 0],
+                        "size": [20, 0, 20]
                     }
                 ]
             },
@@ -233,6 +248,11 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "glass"
+                    },
+                    {
+                        "type":"Collision",
+                        "center": [0, 0, 0],
+                        "size": [1, 1, 0]
                     }
                 ]
             },
@@ -254,6 +274,11 @@
                         "quadratic": 0.032,
                         "lightColor": [1.0, 0.0, 0.0]
 
+                    },
+                    {
+                        "type":"Collision",
+                        "center": [0, 0, 0],
+                        "size": [1, 0, 1]
                     }
                 ]
             },
@@ -277,8 +302,8 @@
                         "constant": 1.0,
                         "linear": 0.00,
                         "quadratic": 0.00,
-                        "outerAngle": 50,
-                        "innerAngle": 20,
+                        "outerAngle": 25,
+                        "innerAngle": 10,
                         "direction": [0, -1, 0],
                         "lightColor": [1.0, 1.0, 1.0]
 

@@ -21,6 +21,7 @@ namespace our
         Application* app; // The application in which the state runs
         bool mouse_locked = false; // Is the mouse locked
 
+
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application* app){
@@ -56,6 +57,8 @@ namespace our
             // We get a reference to the entity's position and rotation
             glm::vec3& position = entity->localTransform.position;
             glm::vec3& rotation = entity->localTransform.rotation;
+            entity->last_location = position;
+
 
             // If the left mouse button is pressed, we get the change in the mouse location
             // and use it to update the camera rotation
