@@ -141,18 +141,18 @@ namespace our
         std::vector<Entity *> lightsources;
         opaqueCommands.clear();
         transparentCommands.clear();
-        Entity* flash;
+        Entity *flash;
         for (auto entity : world->getEntities())
         {
-            //if the entity has a lightsource component, add it to the lightsources vector
-            
+            // if the entity has a lightsource component, add it to the lightsources vector
+
             if (entity->getComponent<LightComponent>())
             {
                 lightsources.push_back(entity);
             }
-            if(entity->name=="flashlight")
+            if (entity->name == "flashlight")
             {
-                flash=entity; 
+                flash = entity;
             }
             // If we hadn't found a camera yet, we look for a camera in this entity
             if (!camera)
@@ -183,6 +183,15 @@ namespace our
         if (camera == nullptr)
             return;
 
+        // Get the camera's local-to-world transformation matrix
+        glm::mat4 cameraMatrix = camera->getOwner()->getLocalToWorldMatrix();
+
+        // Transform the origin to get the camera's position in world space
+        glm::vec3 cameraPosition = glm::vec3(cameraMatrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+        // Print the camera position using printf
+        printf("Camera Position: X: %.2f, Y: %.2f, Z: %.2f\n", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+
         // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         //  HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
 
@@ -195,7 +204,6 @@ namespace our
                      float distance2 = glm::dot(cameraForward, second.center);
                       return distance1 > distance2; });
         flash->getComponent<LightComponent>()->direction = cameraForward;
-        
 
         // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
         glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
@@ -221,60 +229,59 @@ namespace our
         // TODO: (Req 9) Draw all the opaque commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         // If there is a sky material, draw the sky
-        
+
         glEnable(GL_DEPTH_TEST);
         for (auto command : opaqueCommands)
         {
             command.material->setup();
             glm::mat4 transform = VP * command.localToWorld;
             command.material->shader->set("transform", transform);
-            if(dynamic_cast<LitMaterial*>(command.material))
+            if (dynamic_cast<LitMaterial *>(command.material))
             {
-                //TODO: nothing to do here just placing this to tell u this is where you would look at if anything goes wrong
-                //and fragment shader
-                //light-sources.cpp if smth is not parsed right
-                //lit material.cpp if smth is not parsed right for material
-                glm::vec3 cameraPos = camera->getOwner()->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f);
-                command.material->shader->set("view_pos",cameraPos);
-                command.material->shader->set("model",command.localToWorld);
-                GLint temp=lightsources.size();
-                command.material->shader->set("number_of_lights",temp);
-                for(int i=0;i<lightsources.size();i++)
+                // TODO: nothing to do here just placing this to tell u this is where you would look at if anything goes wrong
+                // and fragment shader
+                // light-sources.cpp if smth is not parsed right
+                // lit material.cpp if smth is not parsed right for material
+                glm::vec3 cameraPos = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+                command.material->shader->set("view_pos", cameraPos);
+                command.material->shader->set("model", command.localToWorld);
+                GLint temp = lightsources.size();
+                command.material->shader->set("number_of_lights", temp);
+                for (int i = 0; i < lightsources.size(); i++)
                 {
-                    LightComponent* light = lightsources[i]->getComponent<LightComponent>();
+                    LightComponent *light = lightsources[i]->getComponent<LightComponent>();
                     std::string lightType = light->lightType;
-                    if(lightType=="spot")
+                    if (lightType == "spot")
                     {
-                        command.material->shader->set("lights["+std::to_string(i)+"].type",2);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].type", 2);
                         //
-                        command.material->shader->set("lights["+std::to_string(i)+"].position",glm::vec3(lightsources[i]->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f))); 
-                        command.material->shader->set("lights["+std::to_string(i)+"].direction",light->direction);
-                        command.material->shader->set("lights["+std::to_string(i)+"].cutOff",glm::cos(glm::radians(light->innerAngle)));
-                        command.material->shader->set("lights["+std::to_string(i)+"].outerCutOff",glm::cos(glm::radians(light->outerAngle)));
+                        command.material->shader->set("lights[" + std::to_string(i) + "].position", glm::vec3(lightsources[i]->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)));
+                        command.material->shader->set("lights[" + std::to_string(i) + "].direction", light->direction);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].cutOff", glm::cos(glm::radians(light->innerAngle)));
+                        command.material->shader->set("lights[" + std::to_string(i) + "].outerCutOff", glm::cos(glm::radians(light->outerAngle)));
                         // the decay of light
-                        command.material->shader->set("lights["+std::to_string(i)+"].constant",light->constant);
-                        command.material->shader->set("lights["+std::to_string(i)+"].linear",light->linear);
-                        command.material->shader->set("lights["+std::to_string(i)+"].quadratic",light->quadratic);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].constant", light->constant);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].linear", light->linear);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].quadratic", light->quadratic);
                         //
                     }
-                    if(lightType=="point")
+                    if (lightType == "point")
                     {
-                        command.material->shader->set("lights["+std::to_string(i)+"].type",1);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].type", 1);
                         //
-                        command.material->shader->set("lights["+std::to_string(i)+"].constant",light->constant);
-                        command.material->shader->set("lights["+std::to_string(i)+"].linear",light->linear);
-                        command.material->shader->set("lights["+std::to_string(i)+"].quadratic",light->quadratic);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].constant", light->constant);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].linear", light->linear);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].quadratic", light->quadratic);
                         //
-                         command.material->shader->set("lights["+std::to_string(i)+"].position",glm::vec3(lightsources[i]->getLocalToWorldMatrix()*glm::vec4(0.0f,0.0f,0.0f,1.0f))); 
+                        command.material->shader->set("lights[" + std::to_string(i) + "].position", glm::vec3(lightsources[i]->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)));
                     }
-                    if(lightType=="directional")
+                    if (lightType == "directional")
                     {
-                        command.material->shader->set("lights["+std::to_string(i)+"].type",0);
-                        command.material->shader->set("lights["+std::to_string(i)+"].direction",light->direction);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].type", 0);
+                        command.material->shader->set("lights[" + std::to_string(i) + "].direction", light->direction);
                     }
-                    command.material->shader->set("lights["+std::to_string(i)+"].color",light->lightColor);
+                    command.material->shader->set("lights[" + std::to_string(i) + "].color", light->lightColor);
                 }
-                
             }
             command.mesh->draw();
         }

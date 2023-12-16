@@ -341,13 +341,125 @@
                         "type": "Collision",
                         "center": [
                             0,
-                            0,
-                            0
+                            0, // Lower the collision box by half its height
+                            -0.02 // nafs el coordinates el 3arefnha
                         ],
                         "size": [
                             100,
-                            0.05,
+                            0.05, // Keep the size the same y = z
                             100
+                        ]
+                    }
+                ]
+            },
+            //THE FLOOR
+            //IN THE CENTER
+            // Y IS THE UP AND DOWN
+            //IN THE SIZE
+            //Y HYA EL TO5N
+            {
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.845,
+                            0.17,
+                            0
+                        ],
+                        "size": [
+                            27.01,
+                            0,
+                            44
+                        ]
+                    }
+                ]
+            },
+            //WALL FL A5ER EL BEET
+            {
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.19,
+                            5.025,
+                            -10.63
+                        ],
+                        "size": [
+                            18.25,
+                            8.195,
+                            0
+                        ]
+                    }
+                ]
+            },
+            //WALL FL AWEL EL BEET pt1
+            {
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            4.59,
+                            4.19,
+                            20
+                        ],
+                        "size": [
+                            4.95,
+                            6,
+                            0
+                        ]
+                    }
+                ]
+            },
+            //WALL FL AWEL EL BEET pt2
+            {
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            -3.59,
+                            4.19,
+                            20
+                        ],
+                        "size": [
+                            4.55,
+                            6,
+                            0
+                        ]
+                    }
+                ]
+            },
+            //WALL FL GAMB
+            {
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            6.65,
+                            3.48,
+                            4.63
+                        ],
+                        "size": [
+                            0,
+                            6,
+                            32
+                        ]
+                    }
+                ]
+            },
+            //WALL FL GAMB
+            {
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            -5.3,
+                            2.4,
+                            4.63
+                        ],
+                        "size": [
+                            0,
+                            6,
+                            32
                         ]
                     }
                 ]
