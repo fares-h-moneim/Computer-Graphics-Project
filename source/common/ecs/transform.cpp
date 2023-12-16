@@ -28,6 +28,19 @@ namespace our
         // Return the final transformation matrix
         return trans;
     }
+    glm::mat4 Transform::toMat4_r() const
+    {
+        glm::mat4 trans = glm::mat4(1.0f);
+
+        // Apply translation to the matrix
+        trans = glm::translate(trans, position);
+        // Apply scaling to the matrix
+        trans = glm::scale(trans, scale);
+
+        // Return the final transformation matrix
+        return trans;
+
+    }
 
     // Deserializes the entity data and components from a json object
     void Transform::deserialize(const nlohmann::json &data)

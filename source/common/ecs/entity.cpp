@@ -28,6 +28,21 @@ namespace our
         }
         return localToWorldMatrix;
     }
+    glm::mat4 Entity::getLocalToWorldMatrix_r() const
+    {
+        glm::mat4 localToWorldMatrix = localTransform.toMat4_r();
+        // getting the parent of the current object
+        const Entity *parent = this->parent;
+        // while im still not top of the hierarchy
+        while (parent != nullptr)
+        {
+            // multiply current object with its parent
+            localToWorldMatrix = parent->localTransform.toMat4_r() * localToWorldMatrix;
+            parent = parent->parent;
+        }
+        return localToWorldMatrix;
+
+    }
 
     // Deserializes the entity data and components from a json object
     void Entity::deserialize(const nlohmann::json &data)

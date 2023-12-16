@@ -17,8 +17,6 @@ namespace our {
         //check if the two bounding boxes intersect
         if (world_center.x + world_size.x / 2 < other.world_center.x - other.world_size.x / 2 || world_center.x - world_size.x / 2 > other.world_center.x + other.world_size.x / 2)
             return false;
-     
-
         if (world_center.y + world_size.y / 2 < other.world_center.y - other.world_size.y / 2 || world_center.y - world_size.y / 2 > other.world_center.y + other.world_size.y / 2)
             return false;
       

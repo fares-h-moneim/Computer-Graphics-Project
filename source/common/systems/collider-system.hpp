@@ -89,17 +89,17 @@ namespace our
                 CollisionComponent* collider = entity->getComponent<CollisionComponent>();
                 if(collider){
                     //update the collider
+                    //if the collider is the player, remove the rotation from the getLocalToWorldMatrix
+                    //given Localtoworldmatrix how to remove rotation
                     collider->update_collider(entity->getLocalToWorldMatrix(),entity->localTransform.scale);
                     colliding.push_back(entity);
                 }
             }
             //check for collisions
             for(int i = 0; i < colliding.size(); i++){
-                bool collided = false;
                 for(int j = i+1; j < colliding.size(); j++){
                     if( colliding[i]->getComponent<CollisionComponent>()->checkCollision(*colliding[j]->getComponent<CollisionComponent>())){
                         //if a collision has occured, move the object back to its previous position
-                        collided = true;
                         printf("collision detected %d\n",i);
                         MovementComponent* movement = colliding[i]->getComponent<MovementComponent>();
                         FreeCameraControllerComponent* controller = colliding[i]->getComponent<FreeCameraControllerComponent>();

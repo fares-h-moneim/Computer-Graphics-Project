@@ -141,12 +141,18 @@ namespace our
         std::vector<Entity *> lightsources;
         opaqueCommands.clear();
         transparentCommands.clear();
+        Entity* flash;
         for (auto entity : world->getEntities())
         {
             //if the entity has a lightsource component, add it to the lightsources vector
+            
             if (entity->getComponent<LightComponent>())
             {
                 lightsources.push_back(entity);
+            }
+            if(entity->name=="flashlight")
+            {
+                flash=entity; 
             }
             // If we hadn't found a camera yet, we look for a camera in this entity
             if (!camera)
@@ -188,6 +194,8 @@ namespace our
                      float distance1 = glm::dot(cameraForward, first.center);
                      float distance2 = glm::dot(cameraForward, second.center);
                       return distance1 > distance2; });
+        flash->getComponent<LightComponent>()->direction = cameraForward;
+        
 
         // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
         glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();

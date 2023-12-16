@@ -26,6 +26,8 @@ namespace our
                 // If the movement component exists
                 if(movement){
                     // Change the position and rotation based on the linear & angular velocity and delta time.
+                    //if the object is not colliding update TODO
+
                     entity->last_location = entity->localTransform.position;
                     entity->localTransform.position += deltaTime * movement->linearVelocity;
                     entity->localTransform.rotation += deltaTime * movement->angularVelocity;

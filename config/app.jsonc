@@ -147,20 +147,32 @@
                     },
                     {
                         "type":"Collision",
-                        "center": [0, -1, 0],
-                        "size": [1.5, 2, 1.5]
+                        "center": [0, 0, 0],
+                        "size": [1.5, 5, 1.5]
                     }
                 ],
                 "children": [
                     {
+                        "name":"flashlight",
                         "position": [1, -1, -1],
                         "rotation": [45, 45, 0],
                         "scale": [0.1, 0.1, 1.0],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
-                                "mesh": "cube",
+                                "mesh": "cube", //TODO insert model for flashlight
                                 "material": "metal"
+                            },
+                            {
+                                "type": "Light",
+                                "lightType": "spot",
+                                "constant": 0.5,
+                                "linear": 0.00,
+                                "quadratic": 0.00,
+                                "outerAngle": 25,
+                                "innerAngle": 15,
+                                "direction": [1, 0, 0],
+                                "lightColor": [1.0, 1.0, 1.0]
                             }
                         ]
                     }
@@ -252,7 +264,7 @@
                     {
                         "type":"Collision",
                         "center": [0, 0, 0],
-                        "size": [1, 1, 0]
+                        "size": [1, 0, 1]
                     }
                 ]
             },
