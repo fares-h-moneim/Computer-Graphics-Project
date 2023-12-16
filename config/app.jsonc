@@ -211,8 +211,13 @@
         "world": [
             {
                 "position": [
+                    0, //positive x (right)
+                    2, //positive y (up)
+                    25 //positive z (forward)
+                ],
+                "rotation": [
                     0,
-                    2,
+                    0,
                     0
                 ],
                 "components": [
@@ -324,9 +329,33 @@
                 ]
             },
             {
+                "scale": [
+                    100,
+                    100,
+                    100
+                ],
                 "position": [
                     0,
+                    -1.75,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    0,
+                    0
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "grass"
+                    }
+                ]
+            },
+            {
+                "position": [
                     20,
+                    50,
                     0
                 ],
                 "rotation": [
