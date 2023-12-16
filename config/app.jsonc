@@ -212,7 +212,7 @@
             {
                 "position": [
                     0, //positive x (right)
-                    2, //positive y (up)
+                    5, //positive y (up)
                     25 //positive z (forward)
                 ],
                 "rotation": [
@@ -236,7 +236,7 @@
                         ],
                         "size": [
                             1.5,
-                            2,
+                            1,
                             1.5
                         ]
                     }
@@ -312,19 +312,6 @@
                             45,
                             0
                         ]
-                    },
-                    {
-                        "type": "Collision",
-                        "center": [
-                            0,
-                            0,
-                            0
-                        ],
-                        "size": [
-                            1.1,
-                            1.8,
-                            1
-                        ]
                     }
                 ]
             },
@@ -349,6 +336,19 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "grass"
+                    },
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "size": [
+                            100,
+                            0.1,
+                            100
+                        ]
                     }
                 ]
             },
@@ -388,7 +388,7 @@
                         "constant": 1.0,
                         "linear": 0.00,
                         "quadratic": 0.00,
-                        "outerAngle": 25,
+                        "outerAngle": 360,
                         "innerAngle": 10,
                         "direction": [
                             0,
