@@ -96,17 +96,24 @@ namespace our
         TexturedMaterial::setup();
         shader->set("material.shininess",shineness);
         glActiveTexture(GL_TEXTURE1);
-        if(diffuseMap)
-        diffuseMap->bind();
+        if(diffuse)
+            diffuse->bind();
         glActiveTexture(GL_TEXTURE2);
         if(specular)
-        specular->bind();
+            specular->bind();
+        glActiveTexture(GL_TEXTURE3);
+        if(ambient)
+            ambient->bind();
+
         if (sampler)
             sampler->bind(1);
         if (sampler)
             sampler->bind(2);
+        if (sampler)
+            sampler->bind(3);
         shader->set("material.diffuse",1);
         shader->set("material.specular",2);
+        shader->set("material.ambient",3);
         //Q: is this correct?
         
     }
@@ -115,12 +122,10 @@ namespace our
         TexturedMaterial::deserialize(data);
         if (!data.is_object())
             return;
-        roughnessMap = AssetLoader<Texture2D>::get(data.value("roughnessMap", ""));
-        //ambient_occlusionMap = AssetLoader<Texture2D>::get(data.value("ambient_occlusionMap", ""));
-        diffuseMap = AssetLoader<Texture2D>::get(data.value("diffuseMap", ""));
-        specular = AssetLoader<Texture2D>::get(data.value("specular", "")); 
-        shineness = data.value("shineness", 0.0f);
-       // emission = AssetLoader<Texture2D>::get(data.value("emission", ""));   
+         diffuse = AssetLoader<Texture2D>::get(data.value("diffuse", ""));
+         specular = AssetLoader<Texture2D>::get(data.value("specular", "")); 
+         ambient = AssetLoader<Texture2D>::get(data.value("ambient", "")); 
+         shineness = data.value("shineness", 0.0f);
     }
 
 

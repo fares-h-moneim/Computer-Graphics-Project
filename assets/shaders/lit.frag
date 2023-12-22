@@ -10,7 +10,7 @@ in Varyings {
 struct Material {
     sampler2D diffuse; //TODO: taba3 el todo el t7t we will use these instead of constant numbers (i dont know if only diffuse and specular are needed)
     sampler2D specular;
-    float shininess;
+    sampler2D ambient;
 }; 
 struct Light {
     // 0 = directional, 1 = point, 2 = spot
@@ -40,9 +40,9 @@ uniform Light lights[10]; //max of 10 lights increase if needed
 uniform int number_of_lights;
 uniform Material material;
 //strengths
-float ambientStrength = 0.1; //temporary till we have an ambient map
-float specularStrength = 0.5; //temporary till we have a specular map
-float diffuseStrength = 0.5; //temporary till we have a diffuse map
+vec3 ambientStrength = vec3(0.1); //temporary till we have an ambient map
+vec3 specularStrength = vec3(0.5); //temporary till we have a specular map
+vec3 diffuseStrength = vec3(0.5); //temporary till we have a diffuse map
 //add other maps
 //uniform int number_of_point_lights;
 vec3 CalcSpotLight(Light light)
@@ -53,7 +53,7 @@ vec3 CalcSpotLight(Light light)
     // specular shading
     vec3 viewDir = normalize(view_pos - fs_in.Frag_position);
     vec3 reflectDir = reflect(-lightDir, fs_in.normal);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32); //shineniss of material instead of 32
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess); //shineniss of material instead of 32
     // attenuation
     float distance = length(light.position - fs_in.Frag_position);
     float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));   
@@ -81,7 +81,7 @@ vec3 CalcPointLight(Light light)
     // specular
     vec3 viewDir = normalize(view_pos - fs_in.Frag_position);
     vec3 reflectDir = reflect(-lightDir, fs_in.normal);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = specularStrength * spec * light.color;  
     // attenuation
     float distance = length(light.position - fs_in.Frag_position);
@@ -91,12 +91,31 @@ vec3 CalcPointLight(Light light)
     specular *= attenuation;
     return (ambient + diffuse + specular);
 }
+vec3 CalcDirLight(Light light)
+{
+    // ambient
+    vec3 ambient = ambientStrength * light.color;
+    // diffuse 
+    vec3 lightDir = normalize(-light.direction);
+    float diff = max(dot(fs_in.normal, lightDir), 0.0);
+    vec3 diffuse = diffuseStrength*diff * light.color;
+    // specular
+    vec3 viewDir = normalize(view_pos - fs_in.Frag_position);
+    vec3 reflectDir = reflect(-lightDir, fs_in.normal);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = specularStrength * spec * light.color;  
+    // combine results
+    return (ambient + diffuse + specular);
+}
 
 //
 //
 void main(){
     vec3 result = vec3(0.0);
     vec3 mycolor= vec3(texture(tex,fs_in.tex_coord));
+    ambientStrength = vec3(texture(material.ambient,fs_in.tex_coord));
+    specularStrength = vec3(texture(material.specular,fs_in.tex_coord));
+    diffuseStrength = vec3(texture(material.diffuse,fs_in.tex_coord));
     for(int i = 0; i < number_of_lights; i++)
     {
        if(lights[i].type == 1)
