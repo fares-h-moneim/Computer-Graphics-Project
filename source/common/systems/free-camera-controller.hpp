@@ -94,6 +94,7 @@ namespace our
                     right.y = 0;
                     up.y = 0;
 
+
             glm::vec3 current_sensitivity = controller->positionSensitivity;
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if(app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT)) current_sensitivity *= controller->speedupFactor;
@@ -108,6 +109,7 @@ namespace our
             // A & D moves the player left or right 
             if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x);
             if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x);
+<<<<<<< Updated upstream
             if(app->getKeyboard().isPressed(GLFW_KEY_SPACE) && jump_height == 0.0f){
                 jump_height = 0.2f;
             }
@@ -120,6 +122,14 @@ namespace our
                 jump_height = 0.0f;
             }
             position.y -= 0.05f;
+=======
+            position.y-=3.0f*deltaTime;
+
+            if(app->getKeyboard().isPressed(GLFW_KEY_SPACE)){
+                position.y += 0.05f;
+            }
+            
+>>>>>>> Stashed changes
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
