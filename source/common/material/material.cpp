@@ -97,17 +97,6 @@ namespace our
         shader->set("material.shininess",shineness);
         glActiveTexture(GL_TEXTURE1);
         if(diffuse)
-<<<<<<< Updated upstream
-            diffuse->bind();
-        glActiveTexture(GL_TEXTURE2);
-        if(specular)
-            specular->bind();
-        glActiveTexture(GL_TEXTURE3);
-        if(ambient)
-            ambient->bind();
-
-        if (sampler)
-=======
         diffuse->bind();
         glActiveTexture(GL_TEXTURE2);
         if(specular)
@@ -116,17 +105,11 @@ namespace our
         if(ambient)
         ambient->bind();
         if (sampler){
->>>>>>> Stashed changes
             sampler->bind(1);
             sampler->bind(2);
-<<<<<<< Updated upstream
-        if (sampler)
-            sampler->bind(3);
-=======
             sampler->bind(3);
         }
         
->>>>>>> Stashed changes
         shader->set("material.diffuse",1);
         shader->set("material.specular",2);
         shader->set("material.ambient",3);
@@ -138,17 +121,10 @@ namespace our
         TexturedMaterial::deserialize(data);
         if (!data.is_object())
             return;
-<<<<<<< Updated upstream
-         diffuse = AssetLoader<Texture2D>::get(data.value("diffuse", ""));
-         specular = AssetLoader<Texture2D>::get(data.value("specular", "")); 
-         ambient = AssetLoader<Texture2D>::get(data.value("ambient", "")); 
-         shineness = data.value("shineness", 0.0f);
-=======
         diffuse = AssetLoader<Texture2D>::get(data.value("diffuse", ""));
         specular = AssetLoader<Texture2D>::get(data.value("specular", "")); 
         ambient = AssetLoader<Texture2D>::get(data.value("ambient", ""));
         shineness = data.value("shineness", 32.0f); 
->>>>>>> Stashed changes
     }
 
 

@@ -11,10 +11,7 @@ struct Material {
     sampler2D diffuse; //TODO: taba3 el todo el t7t we will use these instead of constant numbers (i dont know if only diffuse and specular are needed)
     sampler2D specular;
     sampler2D ambient;
-<<<<<<< Updated upstream
-=======
     float shininess;
->>>>>>> Stashed changes
 }; 
 struct Light {
     // 0 = directional, 1 = point, 2 = spot
@@ -117,15 +114,9 @@ vec3 CalcDirLight(Light light)
 void main(){
     vec3 result = vec3(0.0);
     vec3 mycolor= vec3(texture(tex,fs_in.tex_coord));
-<<<<<<< Updated upstream
-    ambientStrength = vec3(texture(material.ambient,fs_in.tex_coord));
-    specularStrength = vec3(texture(material.specular,fs_in.tex_coord));
-    diffuseStrength = vec3(texture(material.diffuse,fs_in.tex_coord));
-=======
     ambientStrength = vec3(1.0f); //change with the maps
     diffuseStrength = vec3(1.0f);
     specularStrength = vec3(1.0f);
->>>>>>> Stashed changes
     for(int i = 0; i < number_of_lights; i++)
     {
        if(lights[i].type == 1)

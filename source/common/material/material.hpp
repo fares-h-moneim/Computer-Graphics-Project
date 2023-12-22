@@ -56,15 +56,9 @@ namespace our {
     //class for lit material
     class LitMaterial : public TexturedMaterial {
     public:
-<<<<<<< Updated upstream
         Texture2D* diffuse; 
         Texture2D* specular;
         Texture2D* ambient;
-=======
-        Texture2D* ambient;
-        Texture2D* diffuse; 
-        Texture2D* specular;
->>>>>>> Stashed changes
         float shineness;
         void setup() const override;
         void deserialize(const nlohmann::json& data) override;
