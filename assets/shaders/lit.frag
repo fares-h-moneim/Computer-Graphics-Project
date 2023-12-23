@@ -114,9 +114,9 @@ vec3 CalcDirLight(Light light)
 void main(){
     vec3 result = vec3(0.0);
     vec3 mycolor= vec3(texture(tex,fs_in.tex_coord));
-    ambientStrength = vec3(1.0f); //change with the maps
-    diffuseStrength = vec3(1.0f);
-    specularStrength = vec3(1.0f);
+    ambientStrength = vec3(texture(material.ambient, fs_in.tex_coord));
+    diffuseStrength = vec3(texture(material.diffuse, fs_in.tex_coord));
+    specularStrength = vec3(texture(material.specular, fs_in.tex_coord));
     for(int i = 0; i < number_of_lights; i++)
     {
        if(lights[i].type == 1)

@@ -37,7 +37,8 @@
                 "scp": "assets/textures/173texture.jpg",
                 "flash_light_normal": "assets/textures/monkey.png",
                 //TODO: Change flash_light texture
-                "house": "assets/textures/house.png"
+                "house": "assets/textures/house.png",
+                "white": "assets/textures/white.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -124,7 +125,10 @@
                     "shineness": 0.1,
                     "diffuseMap": "grass",
                     "specularMap": "grass",
-                    "roughnessMap": "grass"
+                    "roughnessMap": "grass",
+                    "ambient": "white",
+                    "diffuse": "white",
+                    "specular": "white"
                 },
                 "monkey": {
                     "type": "lit",
@@ -144,7 +148,10 @@
                         1
                     ],
                     "texture": "monkey",
-                    "sampler": "default"
+                    "sampler": "default",
+                    "ambient": "white",
+                    "diffuse": "white",
+                    "specular": "white"
                 },
                 "moon": {
                     "type": "textured",
@@ -184,7 +191,10 @@
                         1
                     ],
                     "texture": "scp",
-                    "sampler": "default"
+                    "sampler": "default",
+                    "ambient": "white",
+                    "diffuse": "white",
+                    "specular": "white"
                 },
                 "house": {
                     "type": "lit",
@@ -204,7 +214,10 @@
                         1
                     ],
                     "texture": "house",
-                    "sampler": "default"
+                    "sampler": "default",
+                    "ambient": "white",
+                    "diffuse": "white",
+                    "specular": "white"
                 }
             }
         },
