@@ -35,10 +35,22 @@
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/monkey.png",
                 "scp": "assets/textures/173texture.jpg",
-                "flash_light_normal": "assets/textures/monkey.png",
-                //TODO: Change flash_light texture
+                "flash_light_normal": "assets/textures/FlashlightTexture.png",
+                "flash_light_specular": "assets/textures/FlashlightSpecular.png",
+                "flash_light_diffuse": "assets/textures/FlashlightDiffuse.png",
+                "flash_light_ambient": "assets/textures/FlashlightAmbient.png",
                 "house": "assets/textures/house.png",
-                "white": "assets/textures/white.png"
+                "white": "assets/textures/white.png",
+                "shelf": "assets/textures/shelf.jpg",
+                "shelf_ambient": "assets/textures/shelf_ambient.jpg",
+                "shelf_diffuse": "assets/textures/shelf_diffuse.jpg",
+                "shelf_specular": "assets/textures/shelf_specular.jpg",
+                "clock": "assets/textures/clock.png",
+                "clock_ambient": "assets/textures/clock_ambient.png",
+                "clock_diffuse": "assets/textures/clock_diffuse.png",
+                "clock_specular": "assets/textures/clock_specular.png",
+                "rug": "assets/textures/rug.png",
+                "rug_diffuse": "assets/textures/rug_diffuse.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -47,7 +59,10 @@
                 "sphere": "assets/models/sphere.obj",
                 "scp": "assets/models/scp.obj",
                 "flash_light": "assets/models/Flashlight.obj",
-                "house": "assets/models/house.obj"
+                "house": "assets/models/house.obj",
+                "shelf": "assets/models/shelf.obj",
+                "clock": "assets/models/clock.obj",
+                "rug": "assets/models/rug.obj"
             },
             "samplers": {
                 "default": {},
@@ -74,6 +89,9 @@
                         1
                     ],
                     "texture": "flash_light_normal",
+                    "ambient": "flash_light_ambient",
+                    "diffuse": "flash_light_diffuse",
+                    "specular": "flash_light_specular",
                     "sampler": "default"
                 },
                 "glass": {
@@ -218,15 +236,84 @@
                     "ambient": "white",
                     "diffuse": "white",
                     "specular": "white"
+                },
+                "shelf": {
+                    "type": "lit",
+                    "shader": "lit",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "shelf",
+                    "sampler": "default",
+                    "ambient": "shelf_ambient",
+                    "diffuse": "shelf_diffuse",
+                    "specular": "shelf_specular"
+                },
+                "clock": {
+                    "type": "lit",
+                    "shader": "lit",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "clock",
+                    "sampler": "default",
+                    "ambient": "clock_ambient",
+                    "diffuse": "clock_diffuse",
+                    "specular": "clock_specular"
+                },
+                "rug": {
+                    "type": "lit",
+                    "shader": "lit",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": true
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "rug",
+                    "sampler": "default",
+                    "ambient": "white",
+                    "diffuse": "rug_diffuse",
+                    "specular": "white"
                 }
             }
         },
         "world": [
             {
                 "position": [
-                    0, //positive x (right)
-                    5, //positive y (up)
-                    25 //positive z (forward)
+                    0,
+                    50,
+                    25
                 ],
                 "rotation": [
                     0,
@@ -354,22 +441,17 @@
                         "type": "Collision",
                         "center": [
                             0,
-                            0, // Lower the collision box by half its height
-                            -0.02 // nafs el coordinates el 3arefnha
+                            0,
+                            -0.02
                         ],
                         "size": [
                             100,
-                            0.05, // Keep the size the same y = z
+                            0.05,
                             100
                         ]
                     }
                 ]
             },
-            //THE FLOOR
-            //IN THE CENTER
-            // Y IS THE UP AND DOWN
-            //IN THE SIZE
-            //Y HYA EL TO5N
             {
                 "components": [
                     {
@@ -387,7 +469,6 @@
                     }
                 ]
             },
-            //WALL FL A5ER EL BEET
             {
                 "components": [
                     {
@@ -405,7 +486,6 @@
                     }
                 ]
             },
-            //WALL FL AWEL EL BEET pt1
             {
                 "components": [
                     {
@@ -423,7 +503,6 @@
                     }
                 ]
             },
-            //WALL FL AWEL EL BEET pt2
             {
                 "components": [
                     {
@@ -441,7 +520,6 @@
                     }
                 ]
             },
-            //WALL FL GAMB
             {
                 "components": [
                     {
@@ -459,7 +537,6 @@
                     }
                 ]
             },
-            //WALL FL GAMB
             {
                 "components": [
                     {
@@ -549,6 +626,78 @@
                         "type": "Mesh Renderer",
                         "mesh": "house",
                         "material": "house"
+                    }
+                ]
+            },
+            {
+                "position": [
+                    0,
+                    -1.65,
+                    0
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    25,
+                    25,
+                    25
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "shelf",
+                        "material": "shelf"
+                    }
+                ]
+            },
+            {
+                "position": [
+                    0,
+                    -1.65,
+                    0
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    25,
+                    25,
+                    25
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "clock",
+                        "material": "clock"
+                    }
+                ]
+            },
+            {
+                "position": [
+                    0,
+                    -1.55,
+                    0
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    25,
+                    25,
+                    25
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "rug",
+                        "material": "rug"
                     }
                 ]
             }
