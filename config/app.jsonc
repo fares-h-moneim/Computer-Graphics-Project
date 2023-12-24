@@ -48,9 +48,7 @@
                 "clock": "assets/textures/clock.png",
                 "clock_ambient": "assets/textures/clock_ambient.png",
                 "clock_diffuse": "assets/textures/clock_diffuse.png",
-                "clock_specular": "assets/textures/clock_specular.png",
-                "rug": "assets/textures/rug.png",
-                "rug_diffuse": "assets/textures/rug_diffuse.png"
+                "clock_specular": "assets/textures/clock_specular.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -61,8 +59,7 @@
                 "flash_light": "assets/models/Flashlight.obj",
                 "house": "assets/models/house.obj",
                 "shelf": "assets/models/shelf.obj",
-                "clock": "assets/models/clock.obj",
-                "rug": "assets/models/rug.obj"
+                "clock": "assets/models/clock.obj"
             },
             "samplers": {
                 "default": {},
@@ -674,30 +671,6 @@
                         "type": "Mesh Renderer",
                         "mesh": "clock",
                         "material": "clock"
-                    }
-                ]
-            },
-            {
-                "position": [
-                    0,
-                    -1.55,
-                    0
-                ],
-                "rotation": [
-                    0,
-                    0,
-                    0
-                ],
-                "scale": [
-                    25,
-                    25,
-                    25
-                ],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "rug",
-                        "material": "rug"
                     }
                 ]
             }
