@@ -10,8 +10,10 @@
     },
     "scene": {
         "renderer": {
-            "sky": "assets/textures/sky.jpg",
-            "postprocess": "assets/shaders/postprocess/vignette.frag"
+            "sky": "assets/textures/night.png",
+            "postprocess": "assets/shaders/postprocess/vignette.frag",
+            "fx": "assets/shaders/postprocess/grayscale.frag",
+            "duration": 5.0
         },
         "assets": {
             "shaders": {

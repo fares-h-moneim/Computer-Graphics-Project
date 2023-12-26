@@ -2,10 +2,10 @@
 #include "../mesh/mesh-utils.hpp"
 #include "../texture/texture-utils.hpp"
 #include "glad/gl.h"
+#include <GLFW/glfw3.h>
 
 namespace our
 {
-
     void ForwardRenderer::initialize(glm::ivec2 windowSize, const nlohmann::json &config)
     {
         // First, we store the window size for later use
@@ -108,6 +108,62 @@ namespace our
             // so it is more performant to disable the depth mask
             postprocessMaterial->pipelineState.depthMask = false;
         }
+        if (config.contains("fx"))
+        {
+            // TODO: (Req 11) Create a framebuffer
+            // glGenFramebuffers(1, &this->postprocessFrameBuffer);
+            // glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->postprocessFrameBuffer);
+            // TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
+            //  Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
+            //  The depth format can be (Depth component with 24 bits).
+            // colorTarget = texture_utils::empty(GL_RGBA8, windowSize);
+            // depthTarget = texture_utils::empty(GL_DEPTH_COMPONENT24, windowSize);
+
+            // parameters of glFramebufferTexture2D are: target, attachment, textarget, texture, level
+            // 1. target: Specifies the framebuffer target.
+            // target must be GL_DRAW_FRAMEBUFFER, GL_READ_FRAMEBUFFER, or GL_FRAMEBUFFER.
+            // GL_FRAMEBUFFER is equivalent to GL_DRAW_FRAMEBUFFER.
+            // 2. attachment: Specifies the attachment point of the framebuffer.
+            // 3. attachment: must be GL_COLOR_ATTACHMENTi, GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT or
+            // GL_DEPTH_STENCIL_ATTACHMENT.
+            // 4. textarget: Specifies a 2D texture target, or for cube map textures, which face is to be attached.
+            // 5. texture: Specifies the texture object to attach to the framebuffer attachment point named by attachment.
+            // 6. level: Specifies the mipmap level of texture to attach.
+
+            // glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTarget->getOpenGLName(),
+            //                        0);
+            // glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTarget->getOpenGLName(),
+            //                        0);
+            // // TODO: (Req 11) Unbind the framebuffer just to be safe
+            // glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+            // Create a vertex array to use for drawing the texture
+            // glGenVertexArrays(1, &postProcessVertexArray);
+
+            // Create a sampler to use for sampling the scene texture in the post processing shader
+            Sampler *fxSampler = new Sampler();
+            fxSampler->set(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            fxSampler->set(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            fxSampler->set(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            fxSampler->set(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+            // Create the post processing shader
+            ShaderProgram *fxShader = new ShaderProgram();
+            fxShader->attach("assets/shaders/fullscreen.vert", GL_VERTEX_SHADER);
+            fxShader->attach(config.value<std::string>("fx", ""), GL_FRAGMENT_SHADER);
+            fxShader->link();
+
+            // Create a post processing material
+            fxMaterial = new TexturedMaterial();
+            fxMaterial->shader = fxShader;
+            fxMaterial->texture = colorTarget;
+            fxMaterial->sampler = fxSampler;
+            // The default options are fine but we don't need to interact with the depth buffer
+            // so it is more performant to disable the depth mask
+            fxMaterial->pipelineState.depthMask = false;
+
+            startTime = glfwGetTime();
+            duration = 4.0f; // The effect lasts for 5 seconds
+        }
     }
 
     void ForwardRenderer::destroy()
@@ -131,6 +187,13 @@ namespace our
             delete postprocessMaterial->sampler;
             delete postprocessMaterial->shader;
             delete postprocessMaterial;
+        }
+
+        if (fxMaterial)
+        {
+            delete fxMaterial->sampler;
+            delete fxMaterial->shader;
+            delete fxMaterial;
         }
     }
 
@@ -185,6 +248,19 @@ namespace our
 
         // Get the camera's local-to-world transformation matrix
         glm::mat4 cameraMatrix = camera->getOwner()->getLocalToWorldMatrix();
+
+        double currentTime = glfwGetTime();
+        double elapsedTime = currentTime - startTime;
+
+        if (elapsedTime < duration)
+        {
+            float intensity = (elapsedTime / duration);
+            fxMaterial->shader->set("intensity", intensity);
+        }
+        else
+        {
+            fxMaterial->shader->set("intensity", 1.0f);
+        }
 
         // Transform the origin to get the camera's position in world space
         glm::vec3 cameraPosition = glm::vec3(cameraMatrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
@@ -328,6 +404,17 @@ namespace our
 
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
             this->postprocessMaterial->setup();
+            glBindVertexArray(this->postProcessVertexArray);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+        }
+
+        if (fxMaterial)
+        {
+            // TODO: (Req 11) Return to the default framebuffer
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+
+            // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
+            this->fxMaterial->setup();
             glBindVertexArray(this->postProcessVertexArray);
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
