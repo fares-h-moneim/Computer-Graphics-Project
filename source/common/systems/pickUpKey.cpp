@@ -26,7 +26,7 @@ namespace our
 
         if (player && key)
         {
-            // printf("player position: %f, %f, %f\n", player->localTransform.position.x, player->localTransform.position.y, player->localTransform.position.z);
+            printf("player position: %f, %f, %f\n", player->localTransform.position.x, player->localTransform.position.y, player->localTransform.position.z);
             // printf("key position: %f, %f, %f\n", key->localTransform.position.x, key->localTransform.position.y, key->localTransform.position.z);
             // printf("distance: %f\n", glm::distance(player->localTransform.position, key->localTransform.position));
             if (glm::distance(player->localTransform.position, key->localTransform.position) < 1.45f)
