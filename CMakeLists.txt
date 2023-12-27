@@ -90,6 +90,8 @@ set(COMMON_SOURCES
         source/common/systems/collider-system.hpp
         source/common/systems/pickUpKey.cpp
         source/common/systems/pickUpKey.hpp
+        source/common/systems/door-system.cpp
+        source/common/systems/door-system.hpp
         
 )
 

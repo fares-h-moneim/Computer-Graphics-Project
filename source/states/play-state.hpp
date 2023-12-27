@@ -9,6 +9,7 @@
 #include <asset-loader.hpp>
 #include <systems/collider-system.hpp>
 #include <systems/pickUpKey.hpp>
+#include <systems/door-system.hpp>
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate : public our::State
@@ -20,6 +21,7 @@ class Playstate : public our::State
     our::MovementSystem movementSystem;
     our::ColliderSystem colliderSystem;
     our::PickSystem pickSystem;
+    our::DoorSystem doorSystem;
 
     void onInitialize() override
     {
@@ -41,6 +43,7 @@ class Playstate : public our::State
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
         pickSystem.setApp(getApp());
+        doorSystem.setApp(getApp());
     }
 
     void onDraw(double deltaTime) override
@@ -53,6 +56,7 @@ class Playstate : public our::State
         cameraController.update(&world, (float)deltaTime);
 
         pickSystem.update(&world);
+        doorSystem.update(&world);
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 
