@@ -309,6 +309,7 @@
         },
         "world": [
             {
+                "name": "player",
                 "position": [
                     0,
                     50,
@@ -554,6 +555,7 @@
                 ]
             },
             {
+                "name": "moon",
                 "position": [
                     20,
                     50,
