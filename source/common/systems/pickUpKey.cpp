@@ -14,11 +14,7 @@ namespace our
     {
         for (Entity *entity : world->getEntities())
         {
-            if (entity->name == "hand")
-            {
-                hand = entity;
-            }
-            if (entity->name == "moon")
+            if (entity->name == "key")
             {
                 key = entity;
             }
@@ -30,33 +26,23 @@ namespace our
 
         if (player && key)
         {
-            printf("player position: %f, %f, %f\n", player->localTransform.position.x, player->localTransform.position.y, player->localTransform.position.z);
-            printf("key position: %f, %f, %f\n", key->localTransform.position.x, key->localTransform.position.y, key->localTransform.position.z);
-            printf("distance: %f\n", glm::distance(player->localTransform.position, key->localTransform.position));
-            if (glm::distance(player->localTransform.position, key->localTransform.position) < 1.0f)
+            // printf("player position: %f, %f, %f\n", player->localTransform.position.x, player->localTransform.position.y, player->localTransform.position.z);
+            // printf("key position: %f, %f, %f\n", key->localTransform.position.x, key->localTransform.position.y, key->localTransform.position.z);
+            // printf("distance: %f\n", glm::distance(player->localTransform.position, key->localTransform.position));
+            if (glm::distance(player->localTransform.position, key->localTransform.position) < 1.45f)
             {
-                pickUp(world, "key");
-                // printf("key found\n");
+                if (app->getKeyboard().isPressed(GLFW_KEY_X))
+                    pickUp();
             }
         }
     }
 
-    void PickSystem::pickUp(World *world, std::string object_name) // TODO: we can find a better way for searching an entity here
+    void PickSystem::pickUp() // TODO: we can find a better way for searching an entity here
     {
-
-        // Entity *hand = world->GetEntity("hand");
-        // Entity *object = world->GetEntity(object_name);
-
-        // // insert child to hand
-        // world->InsertChild("hand", object_name);
-
-        // glm::vec3 &position = object->localTransform.position;
-        // glm::vec3 &scale = object->localTransform.scale;
-        // glm::vec3 &rotation = object->localTransform.rotation;
-        // printf("object position: %f, %f, %f\n", position.x, position.y, position.z);
-        // printf("object scale: %f, %f, %f\n", scale.x, scale.y, scale.z);
-        // printf("object rotation: %f, %f, %f\n", rotation.x, rotation.y, rotation.z);
-        printf("INSIDE PICKUP");
-        return;
+        // TODO: fix key position
+        key->parent = player;
+        key->localTransform.position = glm::vec3(-0.5f, -0.2f, -0.3f);
+        key->localTransform.rotation = glm::vec3(-90.0f, 45.0f, 0.0f);
+        key->localTransform.scale = glm::vec3(50.0f, 50.0f, 50.0f);
     }
 }

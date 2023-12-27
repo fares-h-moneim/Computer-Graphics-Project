@@ -50,7 +50,11 @@
                 "clock": "assets/textures/clock.png",
                 "clock_ambient": "assets/textures/clock_ambient.png",
                 "clock_diffuse": "assets/textures/clock_diffuse.png",
-                "clock_specular": "assets/textures/clock_specular.png"
+                "clock_specular": "assets/textures/clock_specular.png",
+                "key": "assets/textures/key.png",
+                "key_specular": "assets/textures/key_specular.png",
+                "key_ambient": "assets/textures/key_ambient.png",
+                "key_diffuse": "assets/textures/key_diffuse.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -61,7 +65,8 @@
                 "flash_light": "assets/models/Flashlight.obj",
                 "house": "assets/models/house.obj",
                 "shelf": "assets/models/shelf.obj",
-                "clock": "assets/models/clock.obj"
+                "clock": "assets/models/clock.obj",
+                "key": "assets/models/key.obj"
             },
             "samplers": {
                 "default": {},
@@ -304,6 +309,29 @@
                     "ambient": "white",
                     "diffuse": "rug_diffuse",
                     "specular": "white"
+                },
+                "key": {
+                    "type": "lit",
+                    "shader": "lit",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": true
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "key",
+                    "sampler": "default",
+                    "ambient": "key_ambient",
+                    "diffuse": "key_diffuse",
+                    "specular": "key_specular"
                 }
             }
         },
@@ -520,6 +548,7 @@
                     }
                 ]
             },
+            //Wall fel gamb
             {
                 "components": [
                     {
@@ -537,12 +566,13 @@
                     }
                 ]
             },
+            //Wall fel gamb Left
             {
                 "components": [
                     {
                         "type": "Collision",
                         "center": [
-                            -5.3,
+                            -5.65,
                             2.4,
                             4.63
                         ],
@@ -675,6 +705,31 @@
                         "type": "Mesh Renderer",
                         "mesh": "clock",
                         "material": "clock"
+                    }
+                ]
+            },
+            {
+                "name": "key",
+                "position": [
+                    -5.3,
+                    1.27,
+                    -0.8
+                ],
+                "rotation": [
+                    90,
+                    27, //Not this
+                    0
+                ],
+                "scale": [
+                    20,
+                    20,
+                    20
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "key",
+                        "material": "key"
                     }
                 ]
             }

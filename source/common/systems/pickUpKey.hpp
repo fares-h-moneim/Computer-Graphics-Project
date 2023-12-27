@@ -8,7 +8,6 @@ namespace our
     class PickSystem
     {
         Application *app;
-
         Entity *player;
         Entity *key;
         Entity *hand;
@@ -20,6 +19,6 @@ namespace our
         }
 
         void update(World *world);
-        void pickUp(World *world, std::string);
+        void pickUp();
     };
 }
