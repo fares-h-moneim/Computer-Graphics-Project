@@ -10,7 +10,11 @@ namespace our
         Application *app;
         Entity *player;
         Entity *key;
-        Entity *door;
+        Entity *door1;
+        Entity *door2;
+
+        bool open = false;
+        double openValue = 2;
 
     public:
         void setApp(Application *app)
@@ -18,7 +22,7 @@ namespace our
             this->app = app;
         }
 
-        void update(World *world);
-        void openDoor();
+        void update(World *world, double deltaTime);
+        void openDoor(double deltaTime, Entity *door, float targetX);
     };
 }

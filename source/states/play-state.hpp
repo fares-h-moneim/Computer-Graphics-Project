@@ -56,7 +56,7 @@ class Playstate : public our::State
         cameraController.update(&world, (float)deltaTime);
 
         pickSystem.update(&world);
-        doorSystem.update(&world);
+        doorSystem.update(&world, deltaTime);
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 

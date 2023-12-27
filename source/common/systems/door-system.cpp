@@ -10,7 +10,7 @@
 namespace our
 {
     // This should be called every frame to apply the game logic.
-    void DoorSystem::update(World *world)
+    void DoorSystem::update(World *world, double deltaTime)
     {
         for (Entity *entity : world->getEntities())
         {
@@ -24,7 +24,11 @@ namespace our
             }
             if (entity->name == "door1")
             {
-                door = entity;
+                door1 = entity;
+            }
+            if (entity->name == "door2")
+            {
+                door2 = entity;
             }
         }
 
@@ -32,20 +36,37 @@ namespace our
         {
             if (key->parent == player)
             {
-                if (glm::distance(player->localTransform.position, door->localTransform.position) < 2.0f)
+                if (glm::distance(player->localTransform.position, door1->localTransform.position) < 2.0f)
                 {
                     if (app->getKeyboard().isPressed(GLFW_KEY_X))
                     {
-                        openDoor();
+                        open = true;
                     }
                 }
             }
         }
+        if (open)
+        {
+            openDoor(deltaTime, door1, 2.5);
+            openDoor(deltaTime, door2, -1.5);
+        }
     }
 
-    void DoorSystem::openDoor() // TODO: we can find a better way for searching an entity here
+    void DoorSystem::openDoor(double deltaTime, Entity *door, float targetX)
     {
-        // TODO: fix key position
-        door->localTransform.position = glm::vec3(0.0f, 0.0f, 0.0f);
+        float doorSpeed = 1.0f; // Adjust the speed as needed
+        float x = targetX;
+        float currentX = door->localTransform.position.x;
+
+        if (currentX < x && door->name == "door1")
+        {
+            float newX = currentX + doorSpeed * deltaTime;
+            door->localTransform.position.x = std::min(newX, x);
+        }
+        else if (currentX > x && door->name == "door2")
+        {
+            float newX = currentX - doorSpeed * deltaTime;
+            door->localTransform.position.x = std::max(newX, x);
+        }
     }
 }
