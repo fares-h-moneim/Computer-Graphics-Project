@@ -10,6 +10,7 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+#include <systems/collider-system.hpp>
 
 namespace our
 {
@@ -30,7 +31,7 @@ namespace our
         }
 
         // This should be called every frame to update all entities containing a FreeCameraControllerComponent
-        void update(World *world, float deltaTime)
+        void update(World *world, float deltaTime, ColliderSystem *colliderSystem)
         {
             // First of all, we search for an entity containing both a CameraComponent and a FreeCameraControllerComponent
             // As soon as we find one, we break
@@ -120,9 +121,10 @@ namespace our
                 position -= right * (deltaTime * current_sensitivity.x);
             position.y -= 3.0f * deltaTime;
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE))
+            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && colliderSystem->getOnGround())
             {
-                position.y += 0.1f;
+                position.y += 0.5f;
+                colliderSystem->setOnGround(false);
             }
         }
 

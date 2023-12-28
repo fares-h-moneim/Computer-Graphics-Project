@@ -53,7 +53,7 @@ class Playstate : public our::State
         // here call function
         colliderSystem.checkCollision(&world, (float)deltaTime);
 
-        cameraController.update(&world, (float)deltaTime);
+        cameraController.update(&world, (float)deltaTime, &colliderSystem);
 
         pickSystem.update(&world);
         doorSystem.update(&world, deltaTime);

@@ -90,6 +90,7 @@ namespace our
         }
 
     public:
+        bool onGround = false;
         // This should be called every frame to update all entities containing a MovementComponent.
         void checkCollision(World *world, float deltaTime)
         {
@@ -128,9 +129,24 @@ namespace our
                         {
                             revertMovement(colliding[j], colliding[i]);
                         }
+                        if (colliding[i]->name == "player" && colliding[j]->name == "ground" && onGround == false)
+                        {
+                            printf("on ground\n");
+                            onGround = true;
+                        }
                     }
                 }
             }
+        }
+
+        bool getOnGround()
+        {
+            return onGround;
+        }
+
+        void setOnGround(bool onGround)
+        {
+            this->onGround = onGround;
         }
     };
 
