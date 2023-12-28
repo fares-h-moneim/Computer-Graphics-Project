@@ -41,8 +41,8 @@ namespace our
     {
         // TODO: fix key position
         key->parent = player;
-        key->localTransform.position = glm::vec3(-0.5f, -0.2f, -0.3f);
-        key->localTransform.rotation = glm::vec3(-90.0f, 45.0f, 0.0f);
+        key->localTransform.position = glm::vec3(-0.9f, -0.4f, -0.65f);
+        key->localTransform.rotation = glm::vec3(-20.0f, 45.0f, 0.0f);
         key->localTransform.scale = glm::vec3(50.0f, 50.0f, 50.0f);
     }
 }
