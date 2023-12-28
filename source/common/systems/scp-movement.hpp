@@ -7,8 +7,10 @@
 #include "../components/movement.hpp"
 #include "free-camera-controller.hpp"
 
-namespace our{
-    class ScpMovement{
+namespace our
+{
+    class ScpMovement
+    {
         Application *app;
         Entity *player;
         Entity *scp;
@@ -18,18 +20,12 @@ namespace our{
         bool isInViewPort = false;
 
     public:
-        void setApp(Application *app){
+        void setApp(Application *app)
+        {
             this->app = app;
             windowSize = app->getWindowSize();
         }
         void update(World *world);
-        void isScpInteresctingWithFrustum();
-        void extractPlanes(const glm::mat4& MVP);
-        struct Plane {
-            glm::vec3 normal;
-            float distance;
-        };
-        Plane planes[6];
-        bool isBoxOutsidePlane(const glm::vec4& scpMinPoint, const glm::vec4& scpMaxPoint, const Plane& plane) const;
+        void isSCPVisible();
     };
 }
