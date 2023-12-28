@@ -10,6 +10,7 @@
 #include <systems/collider-system.hpp>
 #include <systems/pickUpKey.hpp>
 #include <systems/door-system.hpp>
+#include <systems/scp-movement.hpp>
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate : public our::State
@@ -22,6 +23,7 @@ class Playstate : public our::State
     our::ColliderSystem colliderSystem;
     our::PickSystem pickSystem;
     our::DoorSystem doorSystem;
+    our::ScpMovement scpMovement;
 
     void onInitialize() override
     {
@@ -44,6 +46,7 @@ class Playstate : public our::State
         renderer.initialize(size, config["renderer"]);
         pickSystem.setApp(getApp());
         doorSystem.setApp(getApp());
+        scpMovement.setApp(getApp());
     }
 
     void onDraw(double deltaTime) override
@@ -57,6 +60,7 @@ class Playstate : public our::State
 
         pickSystem.update(&world);
         doorSystem.update(&world, deltaTime);
+        scpMovement.update(&world);
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 

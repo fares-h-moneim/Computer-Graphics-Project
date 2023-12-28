@@ -92,6 +92,8 @@ set(COMMON_SOURCES
         source/common/systems/pickUpKey.hpp
         source/common/systems/door-system.cpp
         source/common/systems/door-system.hpp
+        source/common/systems/scp-movement.cpp
+        source/common/systems/scp-movement.hpp
         
 )
 
