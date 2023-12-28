@@ -22,10 +22,12 @@ namespace our
     {
         Application *app;          // The application in which the state runs
         bool mouse_locked = false; // Is the mouse locked
+        float finalUp = 1.5f;
 
     public:
         // When a state enters, it should call this function and give it the pointer to the application
-        void enter(Application *app)
+        void
+        enter(Application *app)
         {
             this->app = app;
         }
@@ -121,10 +123,16 @@ namespace our
                 position -= right * (deltaTime * current_sensitivity.x);
             position.y -= 3.0f * deltaTime;
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && colliderSystem->getOnGround())
+            if ((app->getKeyboard().isPressed(GLFW_KEY_SPACE) && colliderSystem->getOnGround() && finalUp == 1.5f) || finalUp != 1.5f)
             {
-                position.y += 0.5f;
+                finalUp -= 0.03f;
+                position.y += 0.03f;
                 colliderSystem->setOnGround(false);
+            }
+
+            if (finalUp < 0)
+            {
+                finalUp = 1.5f;
             }
         }
 
