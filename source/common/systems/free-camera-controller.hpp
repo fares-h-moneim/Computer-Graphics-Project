@@ -121,7 +121,9 @@ namespace our
                 position += right * (deltaTime * current_sensitivity.x);
             if (app->getKeyboard().isPressed(GLFW_KEY_A))
                 position -= right * (deltaTime * current_sensitivity.x);
-            position.y -= 3.0f * deltaTime;
+
+            if (colliderSystem->getOnGround() == false)
+                position.y -= 3.0f * deltaTime;
 
             if ((app->getKeyboard().isPressed(GLFW_KEY_SPACE) && colliderSystem->getOnGround() && finalUp == 1.5f) || finalUp != 1.5f)
             {

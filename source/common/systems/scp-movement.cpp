@@ -37,9 +37,9 @@ namespace our
             {
                 printf("scp not in viewport\n");
                 glm::vec3 directionFromScpToPlayer = player->localTransform.position - scp->localTransform.position;
-                scp->getComponent<MovementComponent>()->linearVelocity = glm::normalize(directionFromScpToPlayer) * 0.5f;
+                scp->getComponent<MovementComponent>()->linearVelocity = glm::normalize(directionFromScpToPlayer) * 1.5f;
                 glm::vec3 linearVelocity = scp->getComponent<MovementComponent>()->linearVelocity;
-                linearVelocity.z = 0.0f;
+                linearVelocity.y = 0.0f;
                 scp->localTransform.position += linearVelocity * static_cast<float>(deltaTime);
             }
         }
