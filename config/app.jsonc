@@ -446,6 +446,7 @@
                 ]
             },
             {
+                "name": "ground",
                 "scale": [
                     100,
                     100,
@@ -483,6 +484,7 @@
                 ]
             },
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
@@ -583,6 +585,138 @@
                             6,
                             32
                         ]
+                    }
+                ]
+            },
+            //trying stairs
+            {
+                "name": "ground",
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.253087,
+                            -1,
+                            27
+                        ],
+                        "size": [
+                            1.5,
+                            0,
+                            0
+                        ]
+                        //0.253087,
+                        //0.476996,
+                        //28.951002
+                    }
+                ]
+            },
+            //trying stairs
+            {
+                "name": "ground",
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.253087,
+                            -0.7,
+                            26.2
+                        ],
+                        "size": [
+                            1.5,
+                            0,
+                            0
+                        ]
+                        //0.253087,
+                        //0.476996,
+                        //28.951002
+                    }
+                ]
+            },
+            //trying stairs
+            {
+                "name": "ground",
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.253087,
+                            -0.4,
+                            25.4
+                        ],
+                        "size": [
+                            1.5,
+                            0,
+                            0
+                        ]
+                        //0.253087,
+                        //0.476996,
+                        //28.951002
+                    }
+                ]
+            },
+            //trying stairs
+            {
+                "name": "ground",
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.253087,
+                            -0.1,
+                            24.6
+                        ],
+                        "size": [
+                            1.5,
+                            0,
+                            0
+                        ]
+                        //0.253087,
+                        //0.476996,
+                        //28.951002
+                    }
+                ]
+            },
+            //trying stairs
+            {
+                "name": "ground",
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.253087,
+                            0.2,
+                            23.8
+                        ],
+                        "size": [
+                            1.5,
+                            0,
+                            0
+                        ]
+                        //0.253087,
+                        //0.476996,
+                        //28.951002
+                    }
+                ]
+            },
+            //trying stairs
+            {
+                "name": "ground",
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.253087,
+                            0.5,
+                            23
+                        ],
+                        "size": [
+                            1.5,
+                            0,
+                            0
+                        ]
+                        //0.253087,
+                        //0.476996,
+                        //28.951002
                     }
                 ]
             },
