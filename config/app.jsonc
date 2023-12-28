@@ -484,6 +484,7 @@
                 ]
             },
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
@@ -589,6 +590,7 @@
             },
             //trying stairs
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
@@ -610,6 +612,7 @@
             },
             //trying stairs
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
@@ -631,6 +634,7 @@
             },
             //trying stairs
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
@@ -652,6 +656,7 @@
             },
             //trying stairs
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
@@ -673,6 +678,7 @@
             },
             //trying stairs
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
@@ -694,6 +700,7 @@
             },
             //trying stairs
             {
+                "name": "ground",
                 "components": [
                     {
                         "type": "Collision",
