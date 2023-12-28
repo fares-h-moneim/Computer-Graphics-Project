@@ -42,10 +42,6 @@ namespace our
     void ScpMovement::isSCPVisible()
     {
         glm::mat4 mvp = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix() * scp->getLocalToWorldMatrix();
-        glm::vec3 halfSize = scpBoundingBox->size * 0.5f;
-        glm::vec4 scpMaxPoint = glm::vec4(halfSize + scpBoundingBox->center, 1.0f);
-        glm::vec4 scpMinPoint = glm::vec4(scpBoundingBox->center - halfSize, 1.0f);
-
         glm::vec4 homo = mvp * glm::vec4(scp->localTransform.position, 1.0f);
         glm::vec4 ndc = homo / homo.w;
 
