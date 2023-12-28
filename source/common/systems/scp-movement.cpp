@@ -10,7 +10,7 @@
 
 namespace our
 {
-    void ScpMovement::update(World *world)
+    void ScpMovement::update(World *world, double deltaTime)
     {
         for (Entity *entity : world->getEntities())
         {
@@ -31,10 +31,16 @@ namespace our
             if (isInViewPort)
             {
                 printf("scp in viewport\n");
+                scp->getComponent<MovementComponent>()->linearVelocity = glm::vec3(0.0f, 0.0f, 0.0f);
             }
             else
             {
                 printf("scp not in viewport\n");
+                glm::vec3 directionFromScpToPlayer = player->localTransform.position - scp->localTransform.position;
+                scp->getComponent<MovementComponent>()->linearVelocity = glm::normalize(directionFromScpToPlayer) * 0.5f;
+                glm::vec3 linearVelocity = scp->getComponent<MovementComponent>()->linearVelocity;
+                linearVelocity.z = 0.0f;
+                scp->localTransform.position += linearVelocity * static_cast<float>(deltaTime);
             }
         }
     }
@@ -42,10 +48,6 @@ namespace our
     void ScpMovement::isSCPVisible()
     {
         glm::mat4 mvp = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix() * scp->getLocalToWorldMatrix();
-        glm::vec3 halfSize = scpBoundingBox->size * 0.5f;
-        glm::vec4 scpMaxPoint = glm::vec4(halfSize + scpBoundingBox->center, 1.0f);
-        glm::vec4 scpMinPoint = glm::vec4(scpBoundingBox->center - halfSize, 1.0f);
-
         glm::vec4 homo = mvp * glm::vec4(scp->localTransform.position, 1.0f);
         glm::vec4 ndc = homo / homo.w;
 

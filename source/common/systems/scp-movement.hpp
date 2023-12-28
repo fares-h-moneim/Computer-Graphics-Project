@@ -25,7 +25,7 @@ namespace our
             this->app = app;
             windowSize = app->getWindowSize();
         }
-        void update(World *world);
+        void update(World *world, double deltaTime);
         void isSCPVisible();
     };
 }

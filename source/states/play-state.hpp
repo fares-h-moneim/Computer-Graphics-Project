@@ -60,7 +60,7 @@ class Playstate : public our::State
 
         pickSystem.update(&world);
         doorSystem.update(&world, deltaTime);
-        scpMovement.update(&world);
+        scpMovement.update(&world, deltaTime);
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 
