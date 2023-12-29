@@ -7,10 +7,14 @@
 #include "../components/collision.hpp"
 
 #include <iostream>
-
 namespace our
 {
-    void ScpMovement::update(World *world, double deltaTime)
+    float calcdistance(float x1, float x2, float y1, float y2)
+    {
+        return sqrt(pow(abs(x2 - x1), 2) + pow(abs(y2 - y1), 2));
+    }
+
+    void ScpMovement::update(World *world, double deltaTime, ForwardRenderer *renderer)
     {
         for (Entity *entity : world->getEntities())
         {
@@ -26,6 +30,10 @@ namespace our
         }
         if (player && scp)
         {
+            float distance = calcdistance(scp->localTransform.position.x, player->localTransform.position.x, scp->localTransform.position.z, player->localTransform.position.z);
+            float intensity = updateShakeIntensity(distance);
+            printf("distance: %f\n", intensity);
+            renderer->setIntensity(intensity);
             scpBoundingBox = scp->getComponent<CollisionComponent>();
             isSCPVisible();
             if (isInViewPort)
@@ -59,5 +67,18 @@ namespace our
         {
             isInViewPort = true;
         }
+    }
+
+    float ScpMovement::updateShakeIntensity(float distance)
+    {
+        float maxShakeIntensity = 0.07f; // da akbar rakam 7aseto over lw akbar
+        float minShakeIntensity = 0.005f;
+        // say lw distance = 2 yb2a max shake
+        // lw akbar mn 20 min shake
+        float shake = 0.07 + (0.005 - 0.7) * ((distance - 2) / 18); // linear interpolation
+        if (shake >= 0)
+            return shake;
+        else
+            return minShakeIntensity;
     }
 }

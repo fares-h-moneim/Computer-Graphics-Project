@@ -5,6 +5,7 @@
 #include "../components/collision.hpp"
 #include "../components/camera.hpp"
 #include "../components/movement.hpp"
+#include "../systems/forward-renderer.hpp"
 #include "free-camera-controller.hpp"
 
 namespace our
@@ -25,7 +26,8 @@ namespace our
             this->app = app;
             windowSize = app->getWindowSize();
         }
-        void update(World *world, double deltaTime);
+        void update(World *world, double deltaTime, ForwardRenderer *renderer);
         void isSCPVisible();
+        float updateShakeIntensity(float distance);
     };
 }

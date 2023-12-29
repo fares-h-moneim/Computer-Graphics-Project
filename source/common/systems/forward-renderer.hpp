@@ -48,6 +48,8 @@ namespace our
 
         double startTime;
         double duration; // The effect lasts for 5 seconds
+        float intensity = 0.0f;
+
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.
         // windowSize is the width & height of the window (in pixels).
@@ -56,6 +58,7 @@ namespace our
         void destroy();
         // This function should be called every frame to draw the given world
         void render(World *world);
+        void setIntensity(float intensity);
     };
 
 }

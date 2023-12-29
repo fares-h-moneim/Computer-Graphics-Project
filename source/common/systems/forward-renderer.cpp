@@ -166,6 +166,11 @@ namespace our
         }
     }
 
+    void ForwardRenderer::setIntensity(float intensity)
+    {
+        this->intensity = intensity;
+    }
+
     void ForwardRenderer::destroy()
     {
         // Delete all objects related to the sky
@@ -252,7 +257,7 @@ namespace our
         double currentTime = glfwGetTime();
         double elapsedTime = currentTime - startTime;
         fxMaterial->shader->set("u_time", (float)currentTime);
-        fxMaterial->shader->set("u_shakeIntensity", 0.02f);
+        fxMaterial->shader->set("u_shakeIntensity", intensity);
 
         /* if (elapsedTime < duration)
          {
