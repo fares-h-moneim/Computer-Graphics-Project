@@ -28,6 +28,8 @@ namespace our
                 // If the movement component exists
                 if (movement)
                 {
+                    if(entity->name=="scp") //delete this
+                        printf(" SCP velocity = %f %f %f\n", movement->linearVelocity.x, movement->linearVelocity.y, movement->linearVelocity.z);
                     // Change the position and rotation based on the linear & angular velocity and delta time.
                     // if the object is not colliding update TODO
 

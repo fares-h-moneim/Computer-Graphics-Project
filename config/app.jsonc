@@ -341,8 +341,8 @@
             {
                 "name": "player",
                 "position": [
-                    5.5,
-                    25, //change this to make us spawn on the ground
+                    7,
+                    2, //change this to make us spawn on the ground
                     -8.5
                 ],
                 "rotation": [
@@ -420,6 +420,11 @@
             },
             {
                 "name": "scp",
+                "position": [
+                    6,
+                    1.3, //change this to make us spawn on the ground
+                    -14
+                ],
                 "scale": [
                     0.125,
                     0.125,

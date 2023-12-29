@@ -14,7 +14,7 @@ namespace our
         return sqrt(pow(abs(x2 - x1), 2) + pow(abs(y2 - y1), 2));
     }
 
-    void ScpMovement::update(World *world, double deltaTime, ForwardRenderer *renderer)
+    void ScpMovement::update(World *world, ForwardRenderer *renderer)
     {
         for (Entity *entity : world->getEntities())
         {
@@ -41,12 +41,14 @@ namespace our
             else
             {
                 glm::vec3 directionFromScpToPlayer = player->localTransform.position - scp->localTransform.position;
-                scp->getComponent<MovementComponent>()->linearVelocity = glm::normalize(directionFromScpToPlayer) * 0.5f;
-                glm::vec3 linearVelocity = scp->getComponent<MovementComponent>()->linearVelocity;
+                //glm::vec3 linearVelocity = glm::normalize(directionFromScpToPlayer) * 0.5f;
+                glm::vec3 linearVelocity= directionFromScpToPlayer;
                 linearVelocity.y = 0.0f;
-                scp->localTransform.position += linearVelocity * static_cast<float>(deltaTime);
+                scp->getComponent<MovementComponent>()->linearVelocity = linearVelocity*0.7f;
+                //set rotation of scp to face player 
+                scp->localTransform.rotation.y = atan2(linearVelocity.x, linearVelocity.z)+3.14f;
                 renderer->setShake(true);
-            }
+            }   
         }
     }
 
