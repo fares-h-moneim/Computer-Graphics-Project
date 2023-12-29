@@ -574,6 +574,25 @@
                     }
                 ]
             },
+            //FOR FARES DA LEL BAB
+            {
+                "name": "door_collider",
+                "components": [
+                    {
+                        "type": "Collision",
+                        "center": [
+                            0.1955,
+                            2,
+                            19
+                        ],
+                        "size": [
+                            5,
+                            5,
+                            0
+                        ]
+                    }
+                ]
+            },
             //Wall fel gamb
             {
                 "name": "wall",
