@@ -12,7 +12,8 @@
         "renderer": {
             "sky": "assets/textures/night.png",
             "postprocess": "assets/shaders/postprocess/vignette.frag",
-            "fx": "assets/shaders/postprocess/shake.frag",
+            "fx": "assets/shaders/postprocess/grayscale.frag",
+            "shake": "assets/shaders/postprocess/shake.frag",
             "duration": 5.0
         },
         "assets": {
@@ -38,9 +39,9 @@
                 "monkey": "assets/textures/monkey.png",
                 "scp": "assets/textures/173texture.jpg",
                 "flash_light_normal": "assets/textures/FlashlightTexture.png",
-                "flash_light_specular": "assets/textures/FlashlightSpecular.png",
-                "flash_light_diffuse": "assets/textures/FlashlightDiffuse.png",
-                "flash_light_ambient": "assets/textures/FlashlightAmbient.png",
+                "flash_light_specular": "assets/textures/FlashlightSpecular.jpg",
+                "flash_light_diffuse": "assets/textures/FlashlightDiffuse.jpg",
+                "flash_light_ambient": "assets/textures/FlashlightAmbient.jpg",
                 "house": "assets/textures/house.png",
                 "white": "assets/textures/white.png",
                 "shelf": "assets/textures/shelf.jpg",
@@ -49,7 +50,6 @@
                 "shelf_specular": "assets/textures/shelf_specular.jpg",
                 "clock": "assets/textures/clock.png",
                 "clock_ambient": "assets/textures/clock_ambient.png",
-                "clock_diffuse": "assets/textures/clock_diffuse.png",
                 "clock_specular": "assets/textures/clock_specular.png",
                 "key": "assets/textures/key.png",
                 "key_specular": "assets/textures/key_specular.png",
@@ -262,8 +262,9 @@
                     "texture": "shelf",
                     "sampler": "default",
                     "ambient": "shelf_ambient",
-                    "diffuse": "shelf_diffuse",
-                    "specular": "shelf_specular"
+                    "diffuse": "shelf",
+                    "specular": "shelf_specular",
+                    "shineness": 64.0
                 },
                 "clock": {
                     "type": "lit",
@@ -285,7 +286,7 @@
                     "texture": "clock",
                     "sampler": "default",
                     "ambient": "clock_ambient",
-                    "diffuse": "clock_diffuse",
+                    "diffuse": "clock",
                     "specular": "clock_specular"
                 },
                 "rug": {
@@ -308,7 +309,7 @@
                     "texture": "rug",
                     "sampler": "default",
                     "ambient": "white",
-                    "diffuse": "rug_diffuse",
+                    "diffuse": "rug",
                     "specular": "white"
                 },
                 "key": {

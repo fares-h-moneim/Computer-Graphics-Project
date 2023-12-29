@@ -31,15 +31,13 @@ namespace our
         if (player && scp)
         {
             float distance = calcdistance(scp->localTransform.position.x, player->localTransform.position.x, scp->localTransform.position.z, player->localTransform.position.z);
-            float intensity = updateShakeIntensity(distance);
-            printf("distance: %f\n", intensity);
-            renderer->setIntensity(intensity);
             scpBoundingBox = scp->getComponent<CollisionComponent>();
             isSCPVisible();
             if (isInViewPort)
             {
                 //  printf("scp in viewport\n");
                 scp->getComponent<MovementComponent>()->linearVelocity = glm::vec3(0.0f, 0.0f, 0.0f);
+                renderer->setShake(false);
             }
             else
             {
@@ -49,6 +47,7 @@ namespace our
                 glm::vec3 linearVelocity = scp->getComponent<MovementComponent>()->linearVelocity;
                 linearVelocity.y = 0.0f;
                 scp->localTransform.position += linearVelocity * static_cast<float>(deltaTime);
+                renderer->setShake(true);
             }
         }
     }

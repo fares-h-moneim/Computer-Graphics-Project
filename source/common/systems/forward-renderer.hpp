@@ -45,7 +45,9 @@ namespace our
         TexturedMaterial *postprocessMaterial;
 
         TexturedMaterial *fxMaterial;
+        TexturedMaterial *shakeMaterial;
 
+        bool shake = false;
         double startTime;
         double duration; // The effect lasts for 5 seconds
         float intensity = 0.0f;
@@ -59,6 +61,10 @@ namespace our
         // This function should be called every frame to draw the given world
         void render(World *world);
         void setIntensity(float intensity);
+        void setShake(bool shake)
+        {
+            this->shake = shake;
+        }
     };
 
 }

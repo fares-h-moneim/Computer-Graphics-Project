@@ -11,7 +11,7 @@
 namespace our
 {
     // This should be called every frame to apply the game logic.
-    void PickSystem::update(World *world)
+    void PickSystem::initialize(World *world)
     {
         for (Entity *entity : world->getEntities())
         {
@@ -24,6 +24,10 @@ namespace our
                 player = entity;
             }
         }
+    }
+
+    void PickSystem::update(World *world)
+    {
 
         for (auto key : keys) // Iterate through all keys
         {
@@ -59,16 +63,19 @@ namespace our
 
     void PickSystem::putDown(Entity *key)
     {
-        if (heldKey == key)
+        if (key)
         {
-            OriginalTransform &orig = originalTransforms[key];
-            key->localTransform.position = orig.position;
-            key->localTransform.rotation = orig.rotation;
-            key->localTransform.scale = orig.scale;
-            key->getComponent<KeyComponent>()->isPickedUp = false;
+            if (heldKey == key)
+            {
+                OriginalTransform &orig = originalTransforms[key];
+                key->localTransform.position = orig.position;
+                key->localTransform.rotation = orig.rotation;
+                key->localTransform.scale = orig.scale;
+                key->getComponent<KeyComponent>()->isPickedUp = false;
 
-            key->parent = nullptr; // Detach from the player
-            heldKey = nullptr;     // No longer holding a key
+                key->parent = nullptr; // Detach from the player
+                heldKey = nullptr;     // No longer holding a key
+            }
         }
     }
 

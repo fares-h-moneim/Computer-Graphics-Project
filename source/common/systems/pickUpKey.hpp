@@ -28,6 +28,8 @@ namespace our
             this->app = app;
         }
 
+        void initialize(World *world);
+
         void update(World *world);
         void pickUp(Entity *key);
         void putDown(Entity *key);

@@ -45,6 +45,7 @@ class Playstate : public our::State
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
         pickSystem.setApp(getApp());
+        pickSystem.initialize(&world);
         doorSystem.setApp(getApp());
         scpMovement.setApp(getApp());
     }

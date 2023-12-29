@@ -13,8 +13,8 @@ void main() {
     vec2 ndcPosition = tex_coord * 2.0 - 1.0;
     
     // Shake Effect
-    float shakeX = sin(u_time * 15.0) * u_shakeIntensity; // Shake on the X-axis
-    float shakeY = cos(u_time * 17.0) * u_shakeIntensity; // Shake on the Y-axis
+    float shakeX = sin(u_time * 15.0) * u_shakeIntensity/2.0; // Shake on the X-axis
+    float shakeY = cos(u_time * 17.0) * u_shakeIntensity/2.0; // Shake on the Y-axis
     vec2 shakeOffset = vec2(shakeX, shakeY);
     
     // Get color from the scene with shake effect applied
@@ -25,7 +25,7 @@ void main() {
     float distanceSquared = dot(ndcPosition, ndcPosition);
     
     // Apply vignette by dividing the scene color by 1 + the squared distance
-    vec3 vignetteColor = sceneColor / (1.0 + distanceSquared * 3.5);
+    vec3 vignetteColor = sceneColor / (1.0 + distanceSquared * 1.0);
 
     // Output the final color with both shake and vignette applied
     frag_color = vec4(vignetteColor, 1.0);
