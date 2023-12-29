@@ -341,9 +341,9 @@
             {
                 "name": "player",
                 "position": [
-                    5.5,
-                    25, //change this to make us spawn on the ground
-                    -8.5
+                    0,
+                    50,
+                    25
                 ],
                 "rotation": [
                     0,

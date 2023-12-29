@@ -33,7 +33,6 @@ namespace our
         {
             if (player && key)
             {
-                printf("player position: %f, %f, %f\n", player->localTransform.position.x, player->localTransform.position.y, player->localTransform.position.z);
                 if (glm::distance(player->localTransform.position, key->localTransform.position) < 1.15f)
                 {
                     if (app->getKeyboard().isPressed(GLFW_KEY_X) && !heldKey)
