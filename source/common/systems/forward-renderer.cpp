@@ -257,7 +257,7 @@ namespace our
         double currentTime = glfwGetTime();
         double elapsedTime = currentTime - startTime;
         fxMaterial->shader->set("u_time", (float)currentTime);
-        fxMaterial->shader->set("u_shakeIntensity", intensity);
+        fxMaterial->shader->set("u_shakeIntensity", 0.0f);
 
         /* if (elapsedTime < duration)
          {
