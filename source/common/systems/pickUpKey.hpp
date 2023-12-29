@@ -2,6 +2,8 @@
 
 #include "../ecs/world.hpp"
 #include "../application.hpp"
+#include <vector>
+#include <unordered_map>
 
 namespace our
 {
@@ -9,8 +11,16 @@ namespace our
     {
         Application *app;
         Entity *player;
-        Entity *key;
+        std::vector<Entity *> keys;
         Entity *hand;
+        Entity *heldKey = nullptr;
+        struct OriginalTransform
+        {
+            glm::vec3 position;
+            glm::vec3 rotation;
+            glm::vec3 scale;
+        };
+        std::unordered_map<Entity *, OriginalTransform> originalTransforms;
 
     public:
         void setApp(Application *app)
@@ -19,6 +29,7 @@ namespace our
         }
 
         void update(World *world);
-        void pickUp();
+        void pickUp(Entity *key);
+        void putDown(Entity *key);
     };
 }

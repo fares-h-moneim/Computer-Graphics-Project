@@ -858,11 +858,115 @@
                 ]
             },
             {
+                //new shelf for other keys
+                "position": [
+                    0,
+                    -1.65,
+                    5
+                ],
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    25,
+                    25,
+                    25
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "shelf",
+                        "material": "shelf"
+                    }
+                ]
+            },
+            {
+                //original key that can be picked up key0
                 "name": "key",
                 "position": [
                     -5.3,
                     1.27,
-                    -0.8
+                    -0.1
+                ],
+                "rotation": [
+                    90,
+                    27, //Not this
+                    0
+                ],
+                "scale": [
+                    20,
+                    20,
+                    20
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "key",
+                        "material": "key"
+                    }
+                ]
+            },
+            {
+                //second key  on original shel
+                "name": "key",
+                "position": [
+                    -5.3,
+                    1.27,
+                    -1.1
+                ],
+                "rotation": [
+                    90,
+                    27, //Not this
+                    0
+                ],
+                "scale": [
+                    20,
+                    20,
+                    20
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "key",
+                        "material": "key"
+                    }
+                ]
+            },
+            {
+                //first key  on second shel
+                "name": "key",
+                "position": [
+                    -5.3,
+                    1.27,
+                    4.8
+                ],
+                "rotation": [
+                    90,
+                    27, //Not this
+                    0
+                ],
+                "scale": [
+                    20,
+                    20,
+                    20
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "key",
+                        "material": "key"
+                    }
+                ]
+            },
+            {
+                //second key  on second shel
+                "name": "key",
+                "position": [
+                    -5.3,
+                    1.27,
+                    4.0
                 ],
                 "rotation": [
                     90,

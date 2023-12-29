@@ -16,7 +16,7 @@ namespace our
         {
             if (entity->name == "key")
             {
-                key = entity;
+                keys.push_back(entity);
             }
             if (entity->name == "player")
             {
@@ -24,25 +24,49 @@ namespace our
             }
         }
 
-        if (player && key)
+        for (auto key : keys) // Iterate through all keys
         {
-            // printf("player position: %f, %f, %f\n", player->localTransform.position.x, player->localTransform.position.y, player->localTransform.position.z);
-            //  printf("key position: %f, %f, %f\n", key->localTransform.position.x, key->localTransform.position.y, key->localTransform.position.z);
-            //  printf("distance: %f\n", glm::distance(player->localTransform.position, key->localTransform.position));
-            if (glm::distance(player->localTransform.position, key->localTransform.position) < 1.45f)
+            if (player && key)
             {
-                if (app->getKeyboard().isPressed(GLFW_KEY_X))
-                    pickUp();
+                if (glm::distance(player->localTransform.position, key->localTransform.position) < 1.15f)
+                {
+                    if (app->getKeyboard().isPressed(GLFW_KEY_X) && !heldKey)
+                        pickUp(key); // picking up if no key is held
+                }
             }
+        }
+
+        if (app->getKeyboard().isPressed(GLFW_KEY_Y) && heldKey)
+        {
+            putDown(heldKey);
         }
     }
 
-    void PickSystem::pickUp() // TODO: we can find a better way for searching an entity here
+    void PickSystem::pickUp(Entity *key) // TODO: we can find a better way for searching an entity here
     {
-        // TODO: fix key position
+        if (!heldKey)
+        {
+            originalTransforms[key] = {key->localTransform.position, key->localTransform.rotation, key->localTransform.scale};
+        }
+        heldKey = key;
         key->parent = player;
         key->localTransform.position = glm::vec3(-0.9f, -0.4f, -0.65f);
         key->localTransform.rotation = glm::vec3(-20.0f, 45.0f, 0.0f);
         key->localTransform.scale = glm::vec3(50.0f, 50.0f, 50.0f);
     }
+
+    void PickSystem::putDown(Entity *key)
+    {
+        if (heldKey == key)
+        {
+            OriginalTransform &orig = originalTransforms[key];
+            key->localTransform.position = orig.position;
+            key->localTransform.rotation = orig.rotation;
+            key->localTransform.scale = orig.scale;
+
+            key->parent = nullptr; // Detach from the player
+            heldKey = nullptr;     // No longer holding a key
+        }
+    }
+
 }
