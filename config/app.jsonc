@@ -346,8 +346,8 @@
                     -8.5
                 ],
                 "rotation": [
-                    0,
-                    0,
+                    30,
+                    180,
                     0
                 ],
                 "components": [
@@ -421,9 +421,9 @@
             {
                 "name": "scp",
                 "position": [
-                    6,
-                    1.3, //change this to make us spawn on the ground
-                    -14
+                    1.8,
+                    0.7, //change this to make us spawn on the ground
+                    -3.5
                 ],
                 "scale": [
                     0.125,
