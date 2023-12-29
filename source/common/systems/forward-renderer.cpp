@@ -251,16 +251,18 @@ namespace our
 
         double currentTime = glfwGetTime();
         double elapsedTime = currentTime - startTime;
+        fxMaterial->shader->set("u_time", (float)currentTime);
+        fxMaterial->shader->set("u_shakeIntensity", 0.02f);
 
-        if (elapsedTime < duration)
-        {
-            float intensity = (elapsedTime / duration);
-            fxMaterial->shader->set("intensity", intensity);
-        }
-        else
-        {
-            fxMaterial->shader->set("intensity", 1.0f);
-        }
+        /* if (elapsedTime < duration)
+         {
+             float intensity = (elapsedTime / duration);
+             fxMaterial->shader->set("intensity", intensity);
+         }
+         else
+         {
+             fxMaterial->shader->set("intensity", 1.0f);
+         }*/
 
         // Transform the origin to get the camera's position in world space
         glm::vec3 cameraPosition = glm::vec3(cameraMatrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
