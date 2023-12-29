@@ -521,6 +521,7 @@
                 ]
             },
             {
+                "name": "wall",
                 "components": [
                     {
                         "type": "Collision",
@@ -538,6 +539,7 @@
                 ]
             },
             {
+                "name": "wall",
                 "components": [
                     {
                         "type": "Collision",
@@ -555,6 +557,7 @@
                 ]
             },
             {
+                "name": "wall",
                 "components": [
                     {
                         "type": "Collision",
@@ -573,6 +576,7 @@
             },
             //Wall fel gamb
             {
+                "name": "wall",
                 "components": [
                     {
                         "type": "Collision",
@@ -591,6 +595,7 @@
             },
             //Wall fel gamb Left
             {
+                "name": "wall",
                 "components": [
                     {
                         "type": "Collision",
