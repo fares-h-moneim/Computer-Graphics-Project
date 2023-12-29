@@ -7,6 +7,7 @@
 #include "movement.hpp"
 #include "light-source.hpp"
 #include "collision.hpp"
+#include "key.hpp"
 
 namespace our
 {
@@ -34,15 +35,18 @@ namespace our
         {
             component = entity->addComponent<MeshRendererComponent>();
         }
-        else if(type == LightComponent::getID())
+        else if (type == LightComponent::getID())
         {
             component = entity->addComponent<LightComponent>();
         }
-        else if(type==CollisionComponent::getID())
+        else if (type == CollisionComponent::getID())
         {
             component = entity->addComponent<CollisionComponent>();
         }
-        
+        else if (type == KeyComponent::getID())
+        {
+            component = entity->addComponent<KeyComponent>();
+        }
 
         if (component)
             component->deserialize(data);

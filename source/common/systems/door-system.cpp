@@ -4,6 +4,7 @@
 #include "free-camera-controller.hpp"
 #include "../ecs/entity.hpp"
 #include "../components/movement.hpp"
+#include "../components/key.hpp"
 
 #include <iostream>
 
@@ -14,9 +15,18 @@ namespace our
     {
         for (Entity *entity : world->getEntities())
         {
-            if (entity->name == "key")
+            if (entity->name == "key" && entity->getComponent<KeyComponent>()->isPickedUp == true)
             {
                 key = entity;
+                printf("key can open door: %d\n", entity->getComponent<KeyComponent>()->keyCanOpenDoor);
+                if (entity->getComponent<KeyComponent>()->keyCanOpenDoor == true)
+                {
+                    keyCanOpenDoor = true;
+                }
+                else
+                {
+                    keyCanOpenDoor = false;
+                }
             }
             if (entity->name == "player")
             {
@@ -32,7 +42,7 @@ namespace our
             }
         }
 
-        if (player && key)
+        if (player && key && keyCanOpenDoor)
         {
             if (key->parent == player)
             {

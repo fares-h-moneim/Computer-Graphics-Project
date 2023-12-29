@@ -905,11 +905,16 @@
                         "type": "Mesh Renderer",
                         "mesh": "key",
                         "material": "key"
+                    },
+                    {
+                        "type": "Key",
+                        "keyCanOpenDoor": false
                     }
                 ]
             },
             {
                 //second key  on original shel
+                "canopendoor": "no",
                 "name": "key",
                 "position": [
                     -5.3,
@@ -931,11 +936,16 @@
                         "type": "Mesh Renderer",
                         "mesh": "key",
                         "material": "key"
+                    },
+                    {
+                        "type": "Key",
+                        "keyCanOpenDoor": false
                     }
                 ]
             },
             {
                 //first key  on second shel
+                "canopendoor": "no",
                 "name": "key",
                 "position": [
                     -5.3,
@@ -957,11 +967,16 @@
                         "type": "Mesh Renderer",
                         "mesh": "key",
                         "material": "key"
+                    },
+                    {
+                        "type": "Key",
+                        "keyCanOpenDoor": false
                     }
                 ]
             },
             {
                 //second key  on second shel
+                "canopendoor": "no",
                 "name": "key",
                 "position": [
                     -5.3,
@@ -983,6 +998,10 @@
                         "type": "Mesh Renderer",
                         "mesh": "key",
                         "material": "key"
+                    },
+                    {
+                        "type": "Key",
+                        "keyCanOpenDoor": true
                     }
                 ]
             },

@@ -12,7 +12,7 @@ namespace our
         Entity *key;
         Entity *door1;
         Entity *door2;
-
+        bool keyCanOpenDoor = false;
         bool open = false;
         double openValue = 2;
 
