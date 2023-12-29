@@ -33,6 +33,11 @@ namespace our
             float distance = calcdistance(scp->localTransform.position.x, player->localTransform.position.x, scp->localTransform.position.z, player->localTransform.position.z);
             scpBoundingBox = scp->getComponent<CollisionComponent>();
             isSCPVisible();
+
+            glm::vec3 directionFromScpToPlayer = player->localTransform.position - scp->localTransform.position;
+            // glm::vec3 linearVelocity = glm::normalize(directionFromScpToPlayer) * 0.5f;
+            glm::vec3 linearVelocity = directionFromScpToPlayer;
+            scp->localTransform.rotation.y = atan2(linearVelocity.x, linearVelocity.z) + 3.14f;
             if (isInViewPort)
             {
                 scp->getComponent<MovementComponent>()->linearVelocity = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -40,15 +45,11 @@ namespace our
             }
             else
             {
-                glm::vec3 directionFromScpToPlayer = player->localTransform.position - scp->localTransform.position;
-                //glm::vec3 linearVelocity = glm::normalize(directionFromScpToPlayer) * 0.5f;
-                glm::vec3 linearVelocity= directionFromScpToPlayer;
                 linearVelocity.y = 0.0f;
-                scp->getComponent<MovementComponent>()->linearVelocity = linearVelocity*0.7f;
-                //set rotation of scp to face player 
-                scp->localTransform.rotation.y = atan2(linearVelocity.x, linearVelocity.z)+3.14f;
+                scp->getComponent<MovementComponent>()->linearVelocity = linearVelocity * 0.7f;
+                // set rotation of scp to face player
                 renderer->setShake(true);
-            }   
+            }
         }
     }
 

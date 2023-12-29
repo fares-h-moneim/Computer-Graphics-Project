@@ -17,6 +17,7 @@
 #include "states/entity-test-state.hpp"
 #include "states/renderer-test-state.hpp"
 #include "states/loss-state.hpp"
+#include "states/win-state.hpp"
 
 int main(int argc, char **argv)
 {
@@ -48,6 +49,7 @@ int main(int argc, char **argv)
     app.registerState<Menustate>("menu");
     app.registerState<Playstate>("play");
     app.registerState<Losestate>("lose");
+    app.registerState<Winstate>("win");
     app.registerState<ShaderTestState>("shader-test");
     app.registerState<MeshTestState>("mesh-test");
     app.registerState<TransformTestState>("transform-test");
