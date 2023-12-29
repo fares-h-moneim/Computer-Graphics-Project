@@ -266,7 +266,6 @@ namespace our
         glm::vec3 cameraPosition = glm::vec3(cameraMatrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 
         // Print the camera position using printf
-        // printf("Camera Position: X: %.2f, Y: %.2f, Z: %.2f\n", cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
         // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         //  HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one

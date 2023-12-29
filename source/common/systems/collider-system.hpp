@@ -19,6 +19,7 @@ namespace our
     class ColliderSystem
     {
     private:
+        Application *app;
         void revertMovement(Entity *moving, Entity *other)
         {
             MovementComponent *movement = moving->getComponent<MovementComponent>();
@@ -83,14 +84,14 @@ namespace our
                 movement->linearVelocity = glm::vec3(0.0f);
             }
             collider->update_collider(moving->getLocalToWorldMatrix(), moving->localTransform.scale);
-            if (collider->checkCollision(*other_collider))
-            {
-                // printf("collision detected after reverting all\n");
-            }
         }
 
     public:
         bool onGround = false;
+        void setApp(Application *app)
+        {
+            this->app = app;
+        }
         // This should be called every frame to update all entities containing a MovementComponent.
         void checkCollision(World *world, float deltaTime)
         {
@@ -116,7 +117,6 @@ namespace our
                     if (colliding[i]->getComponent<CollisionComponent>()->checkCollision(*colliding[j]->getComponent<CollisionComponent>()))
                     {
                         // if a collision has occured, move the object back to its previous position
-                        // printf("collision detected %d\n",i);
                         MovementComponent *movement = colliding[i]->getComponent<MovementComponent>();
                         FreeCameraControllerComponent *controller = colliding[i]->getComponent<FreeCameraControllerComponent>();
                         if (movement || controller)
@@ -131,8 +131,11 @@ namespace our
                         }
                         if (colliding[i]->name == "player" && colliding[j]->name == "ground" && onGround == false)
                         {
-                            printf("on ground\n");
                             onGround = true;
+                        }
+                        if (colliding[i]->name == "player" && colliding[j]->name == "scp")
+                        {
+                            app->changeState("lose");
                         }
                     }
                 }

@@ -48,6 +48,7 @@ class Playstate : public our::State
         pickSystem.initialize(&world);
         doorSystem.setApp(getApp());
         scpMovement.setApp(getApp());
+        colliderSystem.setApp(getApp());
     }
 
     void onDraw(double deltaTime) override
