@@ -33,5 +33,6 @@ namespace our
         void update(World *world);
         void pickUp(Entity *key);
         void putDown(Entity *key);
+        void reset();
     };
 }

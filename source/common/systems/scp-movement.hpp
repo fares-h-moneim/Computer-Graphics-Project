@@ -26,8 +26,9 @@ namespace our
             this->app = app;
             windowSize = app->getWindowSize();
         }
-        void update(World *world,ForwardRenderer *renderer);
+        void update(World *world, ForwardRenderer *renderer);
         void isSCPVisible();
         float updateShakeIntensity(float distance);
+        void reset();
     };
 }

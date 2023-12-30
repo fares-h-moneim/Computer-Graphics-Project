@@ -118,6 +118,10 @@ set(STATES_SOURCES
         source/states/play-state.hpp
         source/states/menu-state.hpp
         source/states/loss-state.hpp
+        source/states/win-state.hpp
+        source/states/slide-show-1.hpp
+        source/states/slide-show-2.hpp
+        source/states/slide-show-3.hpp
         source/states/shader-test-state.hpp
         source/states/mesh-test-state.hpp
         source/states/transform-test-state.hpp

@@ -54,7 +54,8 @@
                 "key": "assets/textures/key.png",
                 "key_specular": "assets/textures/key_specular.png",
                 "key_ambient": "assets/textures/key_ambient.png",
-                "key_diffuse": "assets/textures/key_diffuse.png"
+                "key_diffuse": "assets/textures/key_diffuse.png",
+                "black": "assets/textures/black.jpg"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -149,7 +150,7 @@
                     "diffuseMap": "grass",
                     "specularMap": "grass",
                     "roughnessMap": "grass",
-                    "ambient": "white",
+                    "ambient": "black",
                     "diffuse": "white",
                     "specular": "white"
                 },
@@ -172,7 +173,7 @@
                     ],
                     "texture": "monkey",
                     "sampler": "default",
-                    "ambient": "white",
+                    "ambient": "black",
                     "diffuse": "white",
                     "specular": "white"
                 },
@@ -215,7 +216,7 @@
                     ],
                     "texture": "scp",
                     "sampler": "default",
-                    "ambient": "white",
+                    "ambient": "black",
                     "diffuse": "white",
                     "specular": "white"
                 },
@@ -238,7 +239,7 @@
                     ],
                     "texture": "house",
                     "sampler": "default",
-                    "ambient": "white",
+                    "ambient": "black",
                     "diffuse": "white",
                     "specular": "white"
                 },
@@ -308,7 +309,7 @@
                     ],
                     "texture": "rug",
                     "sampler": "default",
-                    "ambient": "white",
+                    "ambient": "black",
                     "diffuse": "rug",
                     "specular": "white"
                 },
@@ -583,7 +584,7 @@
                         "center": [
                             0.1955,
                             2,
-                            19
+                            20
                         ],
                         "size": [
                             5,

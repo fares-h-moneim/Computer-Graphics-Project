@@ -24,5 +24,6 @@ namespace our
 
         void update(World *world, double deltaTime);
         void openDoor(double deltaTime, Entity *door, float targetX);
+        void reset();
     };
 }

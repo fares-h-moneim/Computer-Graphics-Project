@@ -84,4 +84,14 @@ namespace our
             door->localTransform.position.x = std::max(newX, x);
         }
     }
+
+    void DoorSystem::reset()
+    {
+        keyCanOpenDoor = false;
+        open = false;
+        openValue = 2;
+
+        door1->localTransform.position.x = 0.75;
+        door2->localTransform.position.x = 0.4;
+    }
 }

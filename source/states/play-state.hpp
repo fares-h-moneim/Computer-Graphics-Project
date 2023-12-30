@@ -54,7 +54,7 @@ class Playstate : public our::State
     void onDraw(double deltaTime) override
     {
         // Here, we just run a bunch of systems to control the world logic
-        scpMovement.update(&world,&renderer);
+        scpMovement.update(&world, &renderer);
         movementSystem.update(&world, (float)deltaTime);
         // here call function
         colliderSystem.checkCollision(&world, (float)deltaTime);
@@ -63,7 +63,7 @@ class Playstate : public our::State
 
         pickSystem.update(&world);
         doorSystem.update(&world, deltaTime);
-        
+
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 
@@ -79,6 +79,9 @@ class Playstate : public our::State
 
     void onDestroy() override
     {
+        doorSystem.reset();
+        pickSystem.reset();
+
         // Don't forget to destroy the renderer
         renderer.destroy();
         // On exit, we call exit for the camera controller system to make sure that the mouse is unlocked

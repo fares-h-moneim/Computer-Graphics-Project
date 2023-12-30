@@ -79,4 +79,10 @@ namespace our
         }
     }
 
+    void PickSystem::reset()
+    {
+        heldKey = nullptr;
+        keys.clear();
+    }
+
 }

@@ -51,6 +51,8 @@ class Menustate : public our::State
     // An array of the button that we can interact with
     std::array<Button, 2> buttons;
 
+    bool firstTime = true;
+
     void onInitialize() override
     {
         // First, we create a material for the menu's background
@@ -113,7 +115,12 @@ class Menustate : public our::State
         buttons[0].position = {830.0f, 607.0f};
         buttons[0].size = {400.0f, 33.0f};
         buttons[0].action = [this]()
-        { this->getApp()->changeState("1"); };
+        { if(firstTime){
+            this->getApp()->changeState("1");
+            firstTime = false;
+        }else{
+            this->getApp()->changeState("play");
+        } };
 
         buttons[1].position = {830.0f, 644.0f};
         buttons[1].size = {400.0f, 33.0f};
@@ -126,10 +133,15 @@ class Menustate : public our::State
         // Get a reference to the keyboard object
         auto &keyboard = getApp()->getKeyboard();
 
-        if (keyboard.justPressed(GLFW_KEY_SPACE))
+        if (keyboard.justPressed(GLFW_KEY_SPACE) && firstTime)
         {
             // If the space key is pressed in this frame, go to the play state
             getApp()->changeState("1");
+            firstTime = false;
+        }
+        else if (keyboard.justPressed(GLFW_KEY_SPACE) && !firstTime)
+        {
+            getApp()->changeState("play");
         }
         else if (keyboard.justPressed(GLFW_KEY_ESCAPE))
         {
