@@ -126,6 +126,10 @@ void main(){
         {
             result+= CalcSpotLight(lights[i]);
         }
+        if(lights[i].type==0)
+        {
+            result+= CalcDirLight(lights[i]);
+        }
 
     }   
     

@@ -796,20 +796,15 @@
                     },
                     {
                         "type": "Light",
-                        "lightType": "spot",
-                        "constant": 1.0,
-                        "linear": 0.00,
-                        "quadratic": 0.00,
-                        "outerAngle": 360,
-                        "innerAngle": 10,
+                        "lightType": "directional",
                         "direction": [
                             0,
                             -1,
                             0
                         ],
                         "lightColor": [
-                            1.0,
-                            1.0,
+                            0.7,
+                            0.7,
                             1.0
                         ]
                     }
