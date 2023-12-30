@@ -18,6 +18,9 @@
 #include "states/renderer-test-state.hpp"
 #include "states/loss-state.hpp"
 #include "states/win-state.hpp"
+#include "states/slide-show-1.hpp"
+#include "states/slide-show-2.hpp"
+#include "states/slide-show-3.hpp"
 
 int main(int argc, char **argv)
 {
@@ -50,6 +53,9 @@ int main(int argc, char **argv)
     app.registerState<Playstate>("play");
     app.registerState<Losestate>("lose");
     app.registerState<Winstate>("win");
+    app.registerState<Slide1>("1");
+    app.registerState<Slide2>("2");
+    app.registerState<Slide3>("3");
     app.registerState<ShaderTestState>("shader-test");
     app.registerState<MeshTestState>("mesh-test");
     app.registerState<TransformTestState>("transform-test");
