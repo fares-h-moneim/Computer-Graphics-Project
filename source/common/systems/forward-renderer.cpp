@@ -247,11 +247,14 @@ namespace our
         // Get the camera's local-to-world transformation matrix
         glm::mat4 cameraMatrix = camera->getOwner()->getLocalToWorldMatrix();
 
+        shakeMaterial->shader->use();
+
         double currentTime = glfwGetTime();
         double elapsedTime = currentTime - startTime;
-        shakeMaterial->shader->set("u_time", (float)currentTime);
+        shakeMaterial->shader->set("u_time", (GLfloat)currentTime);
         shakeMaterial->shader->set("u_shakeIntensity", 0.005f);
 
+        fxMaterial->shader->use();
         if (elapsedTime < duration)
         {
             float intensity = (elapsedTime / duration);
@@ -456,6 +459,7 @@ namespace our
 
         if (fxMaterial)
         {
+            fxMaterial->shader->use();
             // TODO: (Req 11) Return to the default framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
@@ -467,6 +471,7 @@ namespace our
 
         if (shakeMaterial && shake)
         {
+            shakeMaterial->shader->use();
             // TODO: (Req 11) Return to the default framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
