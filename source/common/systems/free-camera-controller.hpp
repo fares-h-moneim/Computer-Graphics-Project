@@ -122,8 +122,8 @@ namespace our
             if (app->getKeyboard().isPressed(GLFW_KEY_A))
                 position -= right * (deltaTime * current_sensitivity.x);
 
-           if (!colliderSystem->getOnGround())
-               position.y -= 3.0f * deltaTime;
+            if (!colliderSystem->getOnGround())
+                position.y -= 3.0f * deltaTime;
 
             if ((app->getKeyboard().isPressed(GLFW_KEY_SPACE) && colliderSystem->getOnGround() && finalUp == 1.5f) || finalUp != 1.5f)
             {
@@ -136,9 +136,8 @@ namespace our
             {
                 finalUp = 1.5f;
             }
-            if(position.y<0.0f) //temp fix
+            if (position.y < 0.0f)
             {
-                printf("position.y<0.0f\n");
                 position.y = 1.0f;
             }
         }

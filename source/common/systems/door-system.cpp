@@ -18,7 +18,6 @@ namespace our
             if (entity->name == "key" && entity->getComponent<KeyComponent>()->isPickedUp == true)
             {
                 key = entity;
-                printf("key can open door: %d\n", entity->getComponent<KeyComponent>()->keyCanOpenDoor);
                 if (entity->getComponent<KeyComponent>()->keyCanOpenDoor == true)
                 {
                     keyCanOpenDoor = true;
@@ -64,7 +63,6 @@ namespace our
             openDoor(deltaTime, door1, 2.5);
             openDoor(deltaTime, door2, -1.5);
             removeCollider();
-            printf("player posistion: %f\n", player->localTransform.position.z);
             if (player->localTransform.position.z > 20.4)
             {
                 app->changeState("win");
