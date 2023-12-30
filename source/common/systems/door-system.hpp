@@ -12,6 +12,7 @@ namespace our
         Entity *key;
         Entity *door1;
         Entity *door2;
+        Entity *doorCollider;
         bool keyCanOpenDoor = false;
         bool open = false;
         double openValue = 2;
@@ -24,6 +25,7 @@ namespace our
 
         void update(World *world, double deltaTime);
         void openDoor(double deltaTime, Entity *door, float targetX);
+        void removeCollider();
         void reset();
     };
 }

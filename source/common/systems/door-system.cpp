@@ -40,6 +40,10 @@ namespace our
             {
                 door2 = entity;
             }
+            if (entity->name == "door_collider")
+            {
+                doorCollider = entity;
+            }
         }
 
         if (player && key && keyCanOpenDoor)
@@ -59,6 +63,7 @@ namespace our
         {
             openDoor(deltaTime, door1, 2.5);
             openDoor(deltaTime, door2, -1.5);
+            removeCollider();
             printf("player posistion: %f\n", player->localTransform.position.z);
             if (player->localTransform.position.z > 20.4)
             {
@@ -83,6 +88,12 @@ namespace our
             float newX = currentX - doorSpeed * deltaTime;
             door->localTransform.position.x = std::max(newX, x);
         }
+    }
+
+    void DoorSystem::removeCollider()
+    {
+        if (doorCollider->getComponent<CollisionComponent>() != nullptr)
+            doorCollider->deleteComponent<CollisionComponent>();
     }
 
     void DoorSystem::reset()
