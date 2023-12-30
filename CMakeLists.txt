@@ -14,6 +14,8 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)           # Don't build Installation I
 set(GLFW_USE_HYBRID_HPG ON CACHE BOOL "" FORCE)     # Add variables to use High Performance Graphics Card if available
 add_subdirectory(vendor/glfw)                       # Build the GLFW project to use later as a library
 
+link_directories(vendor/Irrklang/libs)
+
 # A variable with all the source files of GLAD
 set(GLAD_SOURCE vendor/glad/src/gl.c)
 # A variables with all the source files of Dear ImGui
@@ -107,6 +109,7 @@ include_directories(
         vendor/glm
         vendor/imgui
         vendor/utils
+        vendor/Irrklang/include
 )
 
 
@@ -138,3 +141,14 @@ set(STATES_SOURCES
 # Then we link GLFW with each target
 add_executable(GAME_APPLICATION source/main.cpp ${STATES_SOURCES} ${COMMON_SOURCES} ${VENDOR_SOURCES})
 target_link_libraries(GAME_APPLICATION glfw)
+target_link_libraries(GAME_APPLICATION irrKlang)
+
+add_custom_command(TARGET GAME_APPLICATION POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/dlls
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_SOURCE_DIR}/vendor/irrKlang/dlls/irrKlang.dll
+        ${CMAKE_SOURCE_DIR}/vendor/irrKlang/dlls/ikpMP3.dll
+        ${CMAKE_SOURCE_DIR}/vendor/irrKlang/dlls/ikpFlac.dll
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/
+        COMMENT "Copying DLL files to the binary directory"
+        )
