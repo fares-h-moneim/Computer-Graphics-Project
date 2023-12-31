@@ -262,7 +262,7 @@
                     ],
                     "texture": "shelf",
                     "sampler": "default",
-                    "ambient": "shelf_ambient",
+                    "ambient": "black",
                     "diffuse": "shelf",
                     "specular": "shelf_specular",
                     "shineness": 64.0
@@ -347,7 +347,7 @@
                     -8.5
                 ],
                 "rotation": [
-                    30,
+                    15,
                     180,
                     0
                 ],
@@ -422,9 +422,9 @@
             {
                 "name": "scp",
                 "position": [
-                    1.8,
+                    0.6,
                     0.7, //change this to make us spawn on the ground
-                    -3.5
+                    17.8
                 ],
                 "scale": [
                     0.125,

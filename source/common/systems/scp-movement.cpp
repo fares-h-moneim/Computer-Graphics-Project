@@ -46,11 +46,13 @@ namespace our
             else
             {
                 linearVelocity.y = 0.0f;
-                scp->getComponent<MovementComponent>()->linearVelocity = linearVelocity * 0.7f;
+                scp->getComponent<MovementComponent>()->linearVelocity = linearVelocity * 2.1f;
                 // set rotation of scp to face player
                 renderer->setShake(true);
             }
         }
+
+        printf("scp position: %f %f %f\n", scp->localTransform.position.x, scp->localTransform.position.y, scp->localTransform.position.z);
     }
 
     void ScpMovement::isSCPVisible()
