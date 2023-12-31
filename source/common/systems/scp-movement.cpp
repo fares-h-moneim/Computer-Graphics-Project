@@ -51,8 +51,6 @@ namespace our
                 renderer->setShake(true);
             }
         }
-
-        printf("scp position: %f %f %f\n", scp->localTransform.position.x, scp->localTransform.position.y, scp->localTransform.position.z);
     }
 
     void ScpMovement::isSCPVisible()
